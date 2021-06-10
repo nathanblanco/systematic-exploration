@@ -1,0 +1,2912 @@
+adults <- read.table('mixture1_novelty_adults.txt', header=F)#
+#
+names(kids) <- c('subj', 'aic', 'param1', 'param2', 'param3', 'mixture')#
+names(adults) <- c('subj', 'aic', 'param1', 'param2', 'param3', 'mixture')#
+#
+par(mfrow=c(2,1))#
+hist(kids$mixture, xlim=c(0,1), main="Children", xlab="mixture param")#
+hist(adults$mixture, xlim=c(0,1), main="Adults", xlab="mixture param")
+kids <- read.table('mixture1_novelty_children.txt', header=F)#
+adults <- read.table('mixture1_novelty_adults.txt', header=F)#
+#
+names(kids) <- c('subj', 'aic', 'param1', 'param2', 'param3', 'mixture')#
+names(adults) <- c('subj', 'aic', 'param1', 'param2', 'param3', 'mixture')#
+#
+par(mfrow=c(2,1))#
+hist(kids$mixture, xlim=c(0,1), main="Children", xlab="mixture param")#
+hist(adults$mixture, xlim=c(0,1), main="Adults", xlab="mixture param")
+mean(kids$mixture)
+mean(adults$mixture)
+model.data  <- read.table('aics_children.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))
+model.data  <- read.table('aics_adults.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))
+model.data  <- read.table('aics_bland.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))
+model.data  <- read.table('aics_children.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+model.data <- model.data[model.data$subj != 20162,]#
+model.data <- model.data[model.data$subj !=20163,]#
+model.data <- model.data[model.data$subj !=20164 ,]#
+model.data <- model.data[model.data$subj !=20169  ,]#
+model.data <- model.data[model.data$subj !=62036 ,]#
+model.data <- model.data[model.data$subj !=62037 ,]#
+model.data <- model.data[model.data$subj !=62038 ,]#
+model.data <- model.data[model.data$subj !=62039 ,]#
+model.data <- model.data[model.data$subj !=62040 ,]#
+model.data <- model.data[model.data$subj !=1111  ,]#
+model.data <- model.data[model.data$subj !=1112  ,]#
+model.data <- model.data[model.data$subj !=1113 ,]#
+model.data <- model.data[model.data$subj !=1114  ,]#
+model.data <- model.data[model.data$subj !=1115 ,]#
+model.data <- model.data[model.data$subj !=62041  ,]#
+model.data <- model.data[model.data$subj !=62042 ,]#
+model.data <- model.data[model.data$subj !=62043 ,]#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+child.bev <- model.data$Bev#
+child.blag <- model.data$Blag
+model.data  <- read.table('aics_adults.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+adult.bev <- model.data$Bev#
+adult.blag <- model.data$Blag#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))
+model.data  <- read.table('aics_bland.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))
+bland.bev <- model.data$Bev#
+bland.blag <- model.data$Blag
+child.bev
+hist(child.bev)
+median(child.bev)
+median(adult.bev)
+median(child.blag)
+median(adult.blag)
+median(bland.bev)
+median(bland.blag)
+t.test(child.bev, adult.bev, var.equal=T)#
+t.test(child.blag, adult.blag, var.equal=T)#
+#
+t.test(child.bev, bland.bev, var.equal=T)#
+t.test(child.blag, bland.blag, var.equal=T)
+child.ratio <- child.bev/child.blag#
+adult.ratio <- adult.bev/adult.blag#
+bland.ratio <- bland.bev/bland.blag#
+#
+par(mfrow=c(3,1))#
+hist(child.ratio)#
+hist(adult.ratio)#
+hist(bland.ratio)
+median(child.ratio)
+median(adult.ratio)
+median(bland.ratio)
+wilcox.test(child.bev ~ adult.bev)
+wilcox.test(child.bev , adult.bev, correct=F)
+wilcox.test(child.blag , adult.blag, correct=F)
+wilcox.test(child.bev , bland.bev, correct=F)#
+wilcox.test(child.blag , bland.blag, correct=F)
+wilcox.test(child.ratio , adult.ratio, correct=F)#
+wilcox.test(child.ratio , bland.ratio, correct=F)
+median(child.ratio)
+median(adult.ratio)
+median(bland.ratio)
+wilcox.test(adult.ratio , bland.ratio, correct=F)
+wilcox.test(adult.bev , bland.bev, correct=F)#
+wilcox.test(adult.blag , bland.blag, correct=F)
+median(adult.bev)
+median(bland.bev)
+median(adult.blag)
+median(child.blag)
+median(bland.blag)
+model.data  <- read.table('aics_children.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+# remove the children from the novelty condition to only look at baseline#
+model.data <- model.data[model.data$subj != 20162,]#
+model.data <- model.data[model.data$subj !=20163,]#
+model.data <- model.data[model.data$subj !=20164 ,]#
+model.data <- model.data[model.data$subj !=20169  ,]#
+model.data <- model.data[model.data$subj !=62036 ,]#
+model.data <- model.data[model.data$subj !=62037 ,]#
+model.data <- model.data[model.data$subj !=62038 ,]#
+model.data <- model.data[model.data$subj !=62039 ,]#
+model.data <- model.data[model.data$subj !=62040 ,]#
+model.data <- model.data[model.data$subj !=1111  ,]#
+model.data <- model.data[model.data$subj !=1112  ,]#
+model.data <- model.data[model.data$subj !=1113 ,]#
+model.data <- model.data[model.data$subj !=1114  ,]#
+model.data <- model.data[model.data$subj !=1115 ,]#
+model.data <- model.data[model.data$subj !=62041  ,]#
+model.data <- model.data[model.data$subj !=62042 ,]#
+model.data <- model.data[model.data$subj !=62043 ,]#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+#
+sum(as.numeric(model.data$RL_best2))#
+sum(as.numeric(model.data$bias_best2))#
+sum(as.numeric(model.data$lag_best2))#
+#
+child.bev <- model.data$Bev#
+child.blag <- model.data$Blag#
+> length(model.data$subj)#
+[1] 32#
+> #
+> sum(as.numeric(model.data$RL_best))#
+[1] 6#
+> sum(as.numeric(model.data$switch_best))#
+[1] 2#
+> sum(as.numeric(model.data$auto_best))#
+[1] 4#
+> sum(as.numeric(model.data$lag_best))#
+[1] 19#
+> sum(as.numeric(model.data$bias_best))#
+[1] 1#
+model.data  <- read.table('aics_adults.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+#
+adult.bev <- model.data$Bev#
+adult.blag <- model.data$Blag#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+#
+sum(as.numeric(model.data$RL_best2))#
+sum(as.numeric(model.data$bias_best2))#
+sum(as.numeric(model.data$lag_best2))#
+#
+> sum(as.numeric(model.data$RL_best))#
+[1] 11#
+> sum(as.numeric(model.data$switch_best))#
+[1] 1#
+> sum(as.numeric(model.data$auto_best))#
+[1] 0#
+> sum(as.numeric(model.data$lag_best))#
+[1] 20#
+> sum(as.numeric(model.data$bias_best))#
+[1] 2#
+model.data  <- read.table('aics_bland.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+#
+bland.bev <- model.data$Bev#
+bland.blag <- model.data$Blag#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+sum(as.numeric(model.data$lag_over_bias))#
+#
+sum(as.numeric(model.data$RL_best2))#
+sum(as.numeric(model.data$bias_best2))#
+sum(as.numeric(model.data$lag_best2))
+wilcox.test(child.bev , adult.bev, correct=F)#
+wilcox.test(child.blag , adult.blag, correct=F)#
+#
+wilcox.test(child.bev , bland.bev, correct=F)#
+wilcox.test(child.blag , bland.blag, correct=F)#
+#
+wilcox.test(child.ratio , adult.ratio, correct=F)#
+wilcox.test(child.ratio , bland.ratio, correct=F)#
+#
+wilcox.test(adult.ratio , bland.ratio, correct=F)
+child.ratio <- child.bev/child.blag#
+adult.ratio <- adult.bev/adult.blag#
+bland.ratio <- bland.bev/bland.blag#
+#
+par(mfrow=c(3,1))#
+hist(child.ratio)#
+hist(adult.ratio)#
+hist(bland.ratio)#
+wilcox.test(child.bev , adult.bev, correct=F)#
+wilcox.test(child.blag , adult.blag, correct=F)#
+#
+wilcox.test(child.bev , bland.bev, correct=F)#
+wilcox.test(child.blag , bland.blag, correct=F)#
+#
+wilcox.test(child.ratio , adult.ratio, correct=F)#
+wilcox.test(child.ratio , bland.ratio, correct=F)#
+#
+wilcox.test(adult.ratio , bland.ratio, correct=F)
+median(child.ratio)
+median(adult.ratio)
+median(bland.ratio)
+median(child.bev)
+median(adult.bev)
+median(bland.bev)
+median(child.blag)
+median(adult.blag)
+median(bland.blag)
+wilcox.test(adult.bev , bland.bev, correct=F)
+wilcox.test(adult.blag , bland.blag, correct=F)
+model.data  <- read.table('aics_children.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+# remove the children from the novelty condition to only look at baseline#
+model.data <- model.data[model.data$subj != 20162,]#
+model.data <- model.data[model.data$subj !=20163,]#
+model.data <- model.data[model.data$subj !=20164 ,]#
+model.data <- model.data[model.data$subj !=20169  ,]#
+model.data <- model.data[model.data$subj !=62036 ,]#
+model.data <- model.data[model.data$subj !=62037 ,]#
+model.data <- model.data[model.data$subj !=62038 ,]#
+model.data <- model.data[model.data$subj !=62039 ,]#
+model.data <- model.data[model.data$subj !=62040 ,]#
+model.data <- model.data[model.data$subj !=1111  ,]#
+model.data <- model.data[model.data$subj !=1112  ,]#
+model.data <- model.data[model.data$subj !=1113 ,]#
+model.data <- model.data[model.data$subj !=1114  ,]#
+model.data <- model.data[model.data$subj !=1115 ,]#
+model.data <- model.data[model.data$subj !=62041  ,]#
+model.data <- model.data[model.data$subj !=62042 ,]#
+model.data <- model.data[model.data$subj !=62043 ,]#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+#
+sum(as.numeric(model.data$RL_best2))#
+sum(as.numeric(model.data$bias_best2))#
+sum(as.numeric(model.data$lag_best2))#
+#
+# to look at lag parameters for only those best fit by lag instead of bias#
+model.data <- model.data[model.data$lag_over_bias == T,]
+child.bev <- model.data$Bev#
+child.blag <- model.data$Blag#
+> length(model.data$subj)#
+[1] 32#
+> #
+> sum(as.numeric(model.data$RL_best))#
+[1] 6#
+> sum(as.numeric(model.data$switch_best))#
+[1] 2#
+> sum(as.numeric(model.data$auto_best))#
+[1] 4#
+> sum(as.numeric(model.data$lag_best))#
+[1] 19#
+> sum(as.numeric(model.data$bias_best))#
+[1] 1#
+model.data  <- read.table('aics_adults.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+#
+# to look at lag parameters for only those best fit by lag instead of bias#
+model.data <- model.data[model.data$lag_over_bias == T,]#
+#
+adult.bev <- model.data$Bev#
+adult.blag <- model.data$Blag#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+#
+sum(as.numeric(model.data$RL_best2))#
+sum(as.numeric(model.data$bias_best2))#
+sum(as.numeric(model.data$lag_best2))#
+#
+> sum(as.numeric(model.data$RL_best))#
+[1] 11#
+> sum(as.numeric(model.data$switch_best))#
+[1] 1#
+> sum(as.numeric(model.data$auto_best))#
+[1] 0#
+> sum(as.numeric(model.data$lag_best))#
+[1] 20#
+> sum(as.numeric(model.data$bias_best))#
+[1] 2#
+model.data  <- read.table('aics_bland.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+# to look at lag parameters for only those best fit by lag instead of bias#
+model.data <- model.data[model.data$lag_over_bias == T,]#
+#
+bland.bev <- model.data$Bev#
+bland.blag <- model.data$Blag#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+sum(as.numeric(model.data$lag_over_bias))#
+#
+sum(as.numeric(model.data$RL_best2))#
+sum(as.numeric(model.data$bias_best2))#
+sum(as.numeric(model.data$lag_best2))#
+#
+> sum(as.numeric(model.data$RL_best))#
+[1] 8#
+> sum(as.numeric(model.data$switch_best))#
+[1] 5#
+> sum(as.numeric(model.data$auto_best))#
+[1] 6#
+> sum(as.numeric(model.data$lag_best))#
+[1] 4#
+> sum(as.numeric(model.data$bias_best))#
+[1] 2#
+t.test(child.bev, adult.bev, var.equal=T)#
+t.test(child.blag, adult.blag, var.equal=T)#
+#
+t.test(child.bev, bland.bev, var.equal=T)#
+t.test(child.blag, bland.blag, var.equal=T)#
+child.ratio <- child.bev/child.blag#
+adult.ratio <- adult.bev/adult.blag#
+bland.ratio <- bland.bev/bland.blag
+model.data  <- read.table('aics_children.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+# remove the children from the novelty condition to only look at baseline#
+model.data <- model.data[model.data$subj != 20162,]#
+model.data <- model.data[model.data$subj !=20163,]#
+model.data <- model.data[model.data$subj !=20164 ,]#
+model.data <- model.data[model.data$subj !=20169  ,]#
+model.data <- model.data[model.data$subj !=62036 ,]#
+model.data <- model.data[model.data$subj !=62037 ,]#
+model.data <- model.data[model.data$subj !=62038 ,]#
+model.data <- model.data[model.data$subj !=62039 ,]#
+model.data <- model.data[model.data$subj !=62040 ,]#
+model.data <- model.data[model.data$subj !=1111  ,]#
+model.data <- model.data[model.data$subj !=1112  ,]#
+model.data <- model.data[model.data$subj !=1113 ,]#
+model.data <- model.data[model.data$subj !=1114  ,]#
+model.data <- model.data[model.data$subj !=1115 ,]#
+model.data <- model.data[model.data$subj !=62041  ,]#
+model.data <- model.data[model.data$subj !=62042 ,]#
+model.data <- model.data[model.data$subj !=62043 ,]#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+#
+sum(as.numeric(model.data$RL_best2))#
+sum(as.numeric(model.data$bias_best2))#
+sum(as.numeric(model.data$lag_best2))#
+#
+# to look at lag parameters for only those best fit by lag instead of bias#
+model.data <- model.data[model.data$lag_over_bias == T,]
+model.data
+child.bev <- model.data$Bev#
+child.blag <- model.data$Blag
+model.data  <- read.table('aics_adults.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+#
+# to look at lag parameters for only those best fit by lag instead of bias#
+model.data <- model.data[model.data$lag_over_bias == T,]#
+#
+adult.bev <- model.data$Bev#
+adult.blag <- model.data$Blag
+model.data  <- read.table('aics_bland.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+# to look at lag parameters for only those best fit by lag instead of bias#
+model.data <- model.data[model.data$lag_over_bias == T,]#
+#
+bland.bev <- model.data$Bev#
+bland.blag <- model.data$Blag
+child.ratio <- child.bev/child.blag#
+adult.ratio <- adult.bev/adult.blag#
+bland.ratio <- bland.bev/bland.blag
+par(mfrow=c(3,1))#
+hist(child.ratio)#
+hist(adult.ratio)#
+hist(bland.ratio)
+median(child.ratio)
+adult.ratio
+median(adult.ratio)
+median(bland.ratio)
+wilcox.test(child.bev , adult.bev, correct=F)#
+wilcox.test(child.blag , adult.blag, correct=F)
+wilcox.test(child.bev , bland.bev, correct=F)#
+wilcox.test(child.blag , bland.blag, correct=F)
+wilcox.test(child.ratio , adult.ratio, correct=F)#
+wilcox.test(child.ratio , bland.ratio, correct=F)
+wilcox.test(adult.ratio , bland.ratio, correct=F)
+model.data  <- read.table('aics_children.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+# remove the children from the novelty condition to only look at baseline#
+model.data <- model.data[model.data$subj != 20162,]#
+model.data <- model.data[model.data$subj !=20163,]#
+model.data <- model.data[model.data$subj !=20164 ,]#
+model.data <- model.data[model.data$subj !=20169  ,]#
+model.data <- model.data[model.data$subj !=62036 ,]#
+model.data <- model.data[model.data$subj !=62037 ,]#
+model.data <- model.data[model.data$subj !=62038 ,]#
+model.data <- model.data[model.data$subj !=62039 ,]#
+model.data <- model.data[model.data$subj !=62040 ,]#
+model.data <- model.data[model.data$subj !=1111  ,]#
+model.data <- model.data[model.data$subj !=1112  ,]#
+model.data <- model.data[model.data$subj !=1113 ,]#
+model.data <- model.data[model.data$subj !=1114  ,]#
+model.data <- model.data[model.data$subj !=1115 ,]#
+model.data <- model.data[model.data$subj !=62041  ,]#
+model.data <- model.data[model.data$subj !=62042 ,]#
+model.data <- model.data[model.data$subj !=62043 ,]#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+#
+sum(as.numeric(model.data$RL_best2))#
+sum(as.numeric(model.data$bias_best2))#
+sum(as.numeric(model.data$lag_best2))#
+#
+# to look at lag parameters for only those best fit by lag instead of bias#
+#model.data <- model.data[model.data$lag_over_bias == T,]#
+#
+child.bev <- model.data$Bev#
+child.blag <- model.data$Blag#
+> length(model.data$subj)#
+[1] 32#
+> #
+> sum(as.numeric(model.data$RL_best))#
+[1] 6#
+> sum(as.numeric(model.data$switch_best))#
+[1] 2#
+> sum(as.numeric(model.data$auto_best))#
+[1] 4#
+> sum(as.numeric(model.data$lag_best))#
+[1] 19#
+> sum(as.numeric(model.data$bias_best))#
+[1] 1#
+model.data  <- read.table('aics_adults.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+#
+# to look at lag parameters for only those best fit by lag instead of bias#
+model.data <- model.data[model.data$lag_over_bias == T,]#
+#
+adult.bev <- model.data$Bev#
+adult.blag <- model.data$Blag#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+#
+sum(as.numeric(model.data$RL_best2))#
+sum(as.numeric(model.data$bias_best2))#
+sum(as.numeric(model.data$lag_best2))#
+#
+> sum(as.numeric(model.data$RL_best))#
+[1] 11#
+> sum(as.numeric(model.data$switch_best))#
+[1] 1#
+> sum(as.numeric(model.data$auto_best))#
+[1] 0#
+> sum(as.numeric(model.data$lag_best))#
+[1] 20#
+> sum(as.numeric(model.data$bias_best))#
+[1] 2#
+model.data  <- read.table('aics_bland.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+# to look at lag parameters for only those best fit by lag instead of bias#
+#model.data <- model.data[model.data$lag_over_bias == T,]#
+#
+bland.bev <- model.data$Bev#
+bland.blag <- model.data$Blag#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+sum(as.numeric(model.data$lag_over_bias))#
+#
+sum(as.numeric(model.data$RL_best2))#
+sum(as.numeric(model.data$bias_best2))#
+sum(as.numeric(model.data$lag_best2))#
+#
+> sum(as.numeric(model.data$RL_best))#
+[1] 8#
+> sum(as.numeric(model.data$switch_best))#
+[1] 5#
+> sum(as.numeric(model.data$auto_best))#
+[1] 6#
+> sum(as.numeric(model.data$lag_best))#
+[1] 4#
+> sum(as.numeric(model.data$bias_best))#
+[1] 2#
+t.test(child.bev, adult.bev, var.equal=T)#
+t.test(child.blag, adult.blag, var.equal=T)#
+#
+t.test(child.bev, bland.bev, var.equal=T)#
+t.test(child.blag, bland.blag, var.equal=T)#
+child.ratio <- child.bev/child.blag#
+adult.ratio <- adult.bev/adult.blag#
+bland.ratio <- bland.bev/bland.blag
+median(child.bev)
+median(child.blag)
+median(adult.bev)
+median(adult.blag)
+child.bev
+adult.bev
+child.bev[16]
+child.bev[17]
+child.blag[16]
+child.blag[17]
+child.ratio[16]
+child.ratio[17]
+child.bev[order(child.bev)][16]
+child.bev[order(child.bev)][17]
+child.blag[order(child.blag)][16]
+child.blag[order(child.blag)][17]
+child.ratio[order(child.ratio)]
+mean(child.bev)
+mean(child.blag)
+mean(child.ratio)
+9.286847/0.388097
+child.data <- read.table('EBM_aics_children.txt', header=T)#
+adult.data <- read.table('EBM_aics_adults.txt', header=T)#
+child.data <- child.data[child.data$subj != 20162,]#
+child.data <- child.data[child.data$subj !=20163,]#
+child.data <- child.data[child.data$subj !=20164 ,]#
+child.data <- child.data[child.data$subj !=20169  ,]#
+child.data <- child.data[child.data$subj !=62036 ,]#
+child.data <- child.data[child.data$subj !=62037 ,]#
+child.data <- child.data[child.data$subj !=62038 ,]#
+child.data <- child.data[child.data$subj !=62039 ,]#
+child.data <- child.data[child.data$subj !=62040 ,]#
+child.data <- child.data[child.data$subj !=1111  ,]#
+child.data <- child.data[child.data$subj !=1112  ,]#
+child.data <- child.data[child.data$subj !=1113 ,]#
+child.data <- child.data[child.data$subj !=1114  ,]#
+child.data <- child.data[child.data$subj !=1115 ,]#
+child.data <- child.data[child.data$subj !=62041  ,]#
+child.data <- child.data[child.data$subj !=62042 ,]#
+child.data <- child.data[child.data$subj !=62043 ,]
+child.data
+child.data <- child.data[child.data$subj != 20162,]#
+child.data <- child.data[child.data$subj !=20163,]#
+child.data <- child.data[child.data$subj !=20164 ,]#
+child.data <- child.data[child.data$subj !=20169  ,]#
+child.data <- child.data[child.data$subj !=62036 ,]#
+child.data <- child.data[child.data$subj !=62037 ,]#
+child.data <- child.data[child.data$subj !=62038 ,]#
+child.data <- child.data[child.data$subj !=62039 ,]#
+child.data <- child.data[child.data$subj !=62040 ,]#
+child.data <- child.data[child.data$subj !=1111  ,]#
+child.data <- child.data[child.data$subj !=1112  ,]#
+child.data <- child.data[child.data$subj !=1113 ,]#
+child.data <- child.data[child.data$subj !=1114  ,]#
+child.data <- child.data[child.data$subj !=1115 ,]#
+child.data <- child.data[child.data$subj !=62041  ,]#
+child.data <- child.data[child.data$subj !=62042 ,]#
+child.data <- child.data[child.data$subj !=62043 ,]
+child.data
+adult.data
+median(child.data$eb_Blag)#
+median(adult.data.eb_Blag)
+median(child.data$eb_Blag)#
+median(adult.data$eb_Blag)
+par(mfrow=c(2,1))#
+hist(child.data$eb_Blag)#
+hist(adult.data$eb_Blag)
+wilcox.test(child.data$eb_Blag , adult.data$eb_Blag, correct=F)
+median(child.data$eb_Bev)#
+median(adult.data$eb_Bev)#
+#
+par(mfrow=c(2,1))#
+hist(child.data$eb_Bev)#
+hist(adult.data$eb_Bev)#
+#
+wilcox.test(child.data$eb_Bev , adult.data$eb_Bev, correct=F)
+child.ratio <- child.data$eb_Blag/child.data$eb_Bev#
+adult.ratio <- adult.data$eb_Blag/adult.data$eb_Bev#
+#
+median(child.ratio)#
+median(adult.ratio)
+child.ratio <- child.data$eb_Bev/child.data$eb_Blag#
+adult.ratio <- adult.data$eb_Bev/adult.data$eb_Blag#
+#
+median(child.ratio)#
+median(adult.ratio)
+hist(child.ratio)
+hist(adult.ratio)
+wilcox.test(child.ratio, adult.ratio, correct=F)
+#########
+median(child.data$ebm_weight)#
+median(adult.data$ebm_weight)
+par(mfrow=c(2,1))#
+hist(child.data$ebm_weight)#
+hist(adult.data$ebm_weight)
+par(mfrow=c(2,1))#
+hist(child.data$ebm_weight, xlim=c(0,1))#
+hist(adult.data$ebm_weight, xlim=c(0,1))
+par(mfrow=c(2,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), breaks=10)#
+hist(adult.data$ebm_weight, xlim=c(0,1), breaks=10)
+par(mfrow=c(2,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), breaks=(0.1))#
+hist(adult.data$ebm_weight, xlim=c(0,1), breaks=10)
+par(mfrow=c(2,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), breaks=c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9))#
+hist(adult.data$ebm_weight, xlim=c(0,1), breaks=c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9))
+par(mfrow=c(2,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), breaks=c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0))#
+hist(adult.data$ebm_weight, xlim=c(0,1), breaks=c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0))
+par(mfrow=c(2,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0))#
+hist(adult.data$ebm_weight, xlim=c(0,1), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0))
+par(mfrow=c(2,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Weights: Children')#
+hist(adult.data$ebm_weight, xlim=c(0,1), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Weights: Adults')
+par(mfrow=c(2,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children', xlab="weight")#
+hist(adult.data$ebm_weight, xlim=c(0,1), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Adults', xlab='weight')
+wilcox.test(child.data$ebm_weight , adult.data$ebm_weight, correct=F)
+child.data <- read.table('EBM_aics_children.txt', header=T)#
+adult.data <- read.table('EBM_aics_adults.txt', header=T)#
+bland.data <- read.table('EBM_aics_bland.txt', header=T)#
+child.data <- child.data[child.data$subj != 20162,]#
+child.data <- child.data[child.data$subj !=20163,]#
+child.data <- child.data[child.data$subj !=20164 ,]#
+child.data <- child.data[child.data$subj !=20169  ,]#
+child.data <- child.data[child.data$subj !=62036 ,]#
+child.data <- child.data[child.data$subj !=62037 ,]#
+child.data <- child.data[child.data$subj !=62038 ,]#
+child.data <- child.data[child.data$subj !=62039 ,]#
+child.data <- child.data[child.data$subj !=62040 ,]#
+child.data <- child.data[child.data$subj !=1111  ,]#
+child.data <- child.data[child.data$subj !=1112  ,]#
+child.data <- child.data[child.data$subj !=1113 ,]#
+child.data <- child.data[child.data$subj !=1114  ,]#
+child.data <- child.data[child.data$subj !=1115 ,]#
+child.data <- child.data[child.data$subj !=62041  ,]#
+child.data <- child.data[child.data$subj !=62042 ,]#
+child.data <- child.data[child.data$subj !=62043 ,]#
+#
+median(child.data$eb_Blag)#
+median(adult.data$eb_Blag)#
+median(bland.data$eb_Blag)
+par(mfrow=c(2,1))#
+hist(child.data$eb_Blag)#
+hist(adult.data$eb_Blag)#
+hist(bland.data$eb_Blag)
+par(mfrow=c(3,1))#
+hist(child.data$eb_Blag)#
+hist(adult.data$eb_Blag)#
+hist(bland.data$eb_Blag)
+wilcox.test(child.data$eb_Blag , adult.data$eb_Blag, correct=F)#
+wilcox.test(child.data$eb_Blag , bland.data$eb_Blag, correct=F)
+median(child.data$eb_Bev)#
+median(adult.data$eb_Bev)#
+median(bland.data$eb_Bev)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$eb_Bev)#
+hist(adult.data$eb_Bev)#
+hist(bland.data$eb_Bev)
+median(child.data$ebm_weight)#
+median(adult.data$ebm_weight)#
+median(bland.data$ebm_weight)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children', xlab="weight")#
+hist(adult.data$ebm_weight, xlim=c(0,1), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Adults', xlab='weight')#
+hist(bland.data$ebm_weight, xlim=c(0,1), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children: exposed rewards', xlab='weight')
+wilcox.test(child.data$ebm_weight , adult.data$ebm_weight, correct=F)#
+wilcox.test(child.data$ebm_weight , bland.data$ebm_weight, correct=F)#
+wilcox.test(bland.data$ebm_weight , adult.data$ebm_weight, correct=F)
+mean(child.data$ebm_weight)#
+mean(adult.data$ebm_weight)#
+mean(bland.data$ebm_weight)
+wilcox.test(child.data$eb_Bev , adult.data$eb_Bev, correct=F)#
+wilcox.test(child.data$eb_Bev , bland.data$eb_Bev, correct=F)#
+wilcox.test(adult.data$eb_Bev , bland.data$eb_Bev, correct=F)
+wilcox.test(child.data$eb_Blag , adult.data$eb_Blag, correct=F)#
+wilcox.test(child.data$eb_Blag , bland.data$eb_Blag, correct=F)#
+wilcox.test(adult.data$eb_Blag , bland.data$eb_Blag, correct=F)
+par(mfrow=c(3,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), ylim=c(0,20), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children', xlab="weight")#
+hist(adult.data$ebm_weight, xlim=c(0,1), ylim=c(0,20), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Adults', xlab='weight')#
+hist(bland.data$ebm_weight, xlim=c(0,1), ylim=c(0,20), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children: exposed rewards', xlab='weight')
+par(mfrow=c(3,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children', xlab="weight")#
+hist(adult.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Adults', xlab='weight')#
+hist(bland.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children: exposed rewards', xlab='weight')
+#setwd('/Users/blanco.53/Dropbox/Work/current_projects/Infant study/data/w_ages')#
+#
+# I'm not sure why I did it this way, but for some reason I had output the conditions#
+# as separate files, so I input them separately here and then combine them into a single#
+# dataframe below#
+visual_data <- read.table('visual_data2.dat', header=F)#
+baseline_data <- read.table('baseline_data2.dat', header=F)#
+labels_data <- read.table('labels_data2.dat', header=F)#
+sounds_data <- read.table('sounds_data2.dat', header=F)#
+#
+# Jelena: There may be a couple extra columns here I added on later to check some other analyses#
+# so you might need to adjust the column names to fit the data files I sent you#
+names(visual_data) <- c('subj', 'cond', 'trial', 'trial_type', 'trial_start_time',#
+						'gazeX', 'gazeY', 'correct', 'incorrect', 'time', 'age')#
+names(baseline_data) <- c('subj', 'cond', 'trial', 'trial_type', 'trial_start_time',#
+						'gazeX', 'gazeY', 'correct', 'incorrect', 'time', 'age')#
+names(labels_data) <- c('subj', 'cond', 'trial', 'trial_type', 'trial_start_time',#
+						'gazeX', 'gazeY', 'correct', 'incorrect', 'time', 'age')#
+names(sounds_data) <- c('subj', 'cond', 'trial', 'trial_type', 'trial_start_time',#
+						'gazeX', 'gazeY', 'correct', 'incorrect', 'time', 'age')#
+#
+alldata <- NULL#
+#
+alldata$subj <- c(visual_data$subj, baseline_data$subj, labels_data$subj, sounds_data$subj)#
+alldata$cond <- c(as.character(visual_data$cond), as.character(baseline_data$cond), as.character(labels_data$cond), as.character(sounds_data$cond))#
+alldata$trial <- c(visual_data$trial, baseline_data$trial, labels_data$trial, sounds_data$trial)#
+alldata$trial_type <- c(as.character(visual_data$trial_type), as.character(baseline_data$trial_type), as.character(labels_data$trial_type), as.character(sounds_data$trial_type))#
+alldata$time <- c(visual_data$time, baseline_data$time, labels_data$time, sounds_data$time)#
+alldata$gazeX <- c(visual_data$gazeX, baseline_data$gazeX, labels_data$gazeX, sounds_data$gazeX)#
+alldata$gazeY <- c(visual_data$gazeY, baseline_data$gazeY, labels_data$gazeY, sounds_data$gazeY)#
+alldata$correct <- c(visual_data$correct, baseline_data$correct, labels_data$correct, sounds_data$correct)#
+alldata$incorrect <- c(visual_data$incorrect, baseline_data$incorrect, labels_data$incorrect, sounds_data$incorrect)#
+alldata$age <- c(visual_data$age, baseline_data$age, labels_data$age, sounds_data$age)#
+#
+# here I just add 1 ms to the time for participants where the trial times are odd#
+# it's to line things up better to get the average looking at point#
+alldata$time <- (ceiling(alldata$time/2)*2)#
+#
+alldata$age <- c(visual_data$age, baseline_data$age, labels_data$age, sounds_data$age)#
+#
+alldata$cond <- as.factor(alldata$cond)#
+alldata$trial_type <- as.factor(alldata$trial_type)#
+#
+alldata <- as.data.frame(alldata)#
+testdata <- alldata[alldata$trial_type == 'test',]#
+#
+#################################################
+# EXCLUSIONS#
+#
+# remove subjects that completed less than half the experiment#
+testdata <- testdata[testdata$subj != 5222,]#
+testdata <- testdata[testdata$subj != 5280,]#
+testdata <- testdata[testdata$subj != 5320,]#
+testdata <- testdata[testdata$subj != 5332,]#
+testdata <- testdata[testdata$subj != 5340,]#
+testdata <- testdata[testdata$subj != 5346,]#
+testdata <- testdata[testdata$subj != 5361,]#
+testdata <- testdata[testdata$subj != 5355,]#
+testdata <- testdata[testdata$subj != 5356,]#
+testdata <- testdata[testdata$subj != 5423,]#
+#
+# remove subjets with less than 6 out of 24 valid trials (based on the analysis below;#
+# 'valid' trials are ones they looked at the two stimuli for at least 500 ms total#
+testdata <- testdata[testdata$subj != 5213,]  # 4 valid trials#
+testdata <- testdata[testdata$subj != 5371,]  # 4 valid trials#
+testdata <- testdata[testdata$subj != 5420,]  # 4 valid trials#
+testdata <- testdata[testdata$subj != 5377,]  # 5 valid trials#
+testdata <- testdata[testdata$subj != 5252,]  # 6 valid trials#
+#
+testdata <- testdata[testdata$subj != 5533,] # one valid trial, check this subj#
+# no age for this participant, can't find notes etc. remore for now until/if demographic info is tracked down#
+testdata <- testdata[testdata$subj != 5324,]#
+#
+testdata$sum <- testdata$correct + testdata$incorrect#
+#
+# get sum of looking to either correct or incorrect stimulus#
+total_looking <- tapply(testdata$sum, list(testdata$trial, testdata$subj), sum)#
+#
+# multiply by 2 since they are 2 ms points#
+total_looking <- total_looking * 2#
+#
+# get list indicating if that sum is greater than 500 ms#
+check_time <- total_looking > 500#
+#
+# this is a function to look at check_time and make a list of the subject/trial numbers of bad trials#
+Which.names <- function(DF, value) {#
+#
+    output <- NULL#
+	ind <- which(DF==value, arr.ind=TRUE)#
+	output$subject <- as.numeric(colnames(DF)[ind[,"col"]])#
+	output$trial <- as.numeric(rownames(DF)[ind[1:nrow(ind)]])#
+	output <- as.data.frame(output)#
+	return(output)#
+}#
+bad_trials <- Which.names(check_time, FALSE)#
+#
+num_bad_trials <- tapply(bad_trials$trial, bad_trials$subject, length)#
+num_bad_trials#
+#
+# this for loop removes bad trial data from the main datafile#
+# this takes a LONG time ~15 min#
+# I should really find a faster way to do this#
+for (i in 1:length(bad_trials[,1])) {#
+	testdata <- testdata[!(testdata$subj == bad_trials[i,]$subject & testdata$trial == bad_trials[i,]$trial),]#
+}
+# I'm not sure why I did it this way, but for some reason I had output the conditions#
+# as separate files, so I input them separately here and then combine them into a single#
+# dataframe below#
+visual_data <- read.table('visual_data.dat', header=F)#
+baseline_data <- read.table('baseline_data.dat', header=F)#
+labels_data <- read.table('labels_data.dat', header=F)#
+sounds_data <- read.table('sounds_data.dat', header=F)#
+#
+# Jelena: There may be a couple extra columns here I added on later to check some other analyses#
+# so you might need to adjust the column names to fit the data files I sent you#
+names(visual_data) <- c('subj', 'cond', 'trial', 'trial_type', 'trial_start_time',#
+						'gazeX', 'gazeY', 'correct', 'incorrect', 'time', 'age')#
+names(baseline_data) <- c('subj', 'cond', 'trial', 'trial_type', 'trial_start_time',#
+						'gazeX', 'gazeY', 'correct', 'incorrect', 'time', 'age')#
+names(labels_data) <- c('subj', 'cond', 'trial', 'trial_type', 'trial_start_time',#
+						'gazeX', 'gazeY', 'correct', 'incorrect', 'time', 'age')#
+names(sounds_data) <- c('subj', 'cond', 'trial', 'trial_type', 'trial_start_time',#
+						'gazeX', 'gazeY', 'correct', 'incorrect', 'time', 'age')#
+#
+alldata <- NULL#
+#
+alldata$subj <- c(visual_data$subj, baseline_data$subj, labels_data$subj, sounds_data$subj)#
+alldata$cond <- c(as.character(visual_data$cond), as.character(baseline_data$cond), as.character(labels_data$cond), as.character(sounds_data$cond))#
+alldata$trial <- c(visual_data$trial, baseline_data$trial, labels_data$trial, sounds_data$trial)#
+alldata$trial_type <- c(as.character(visual_data$trial_type), as.character(baseline_data$trial_type), as.character(labels_data$trial_type), as.character(sounds_data$trial_type))#
+alldata$time <- c(visual_data$time, baseline_data$time, labels_data$time, sounds_data$time)#
+alldata$gazeX <- c(visual_data$gazeX, baseline_data$gazeX, labels_data$gazeX, sounds_data$gazeX)#
+alldata$gazeY <- c(visual_data$gazeY, baseline_data$gazeY, labels_data$gazeY, sounds_data$gazeY)#
+alldata$correct <- c(visual_data$correct, baseline_data$correct, labels_data$correct, sounds_data$correct)#
+alldata$incorrect <- c(visual_data$incorrect, baseline_data$incorrect, labels_data$incorrect, sounds_data$incorrect)#
+alldata$age <- c(visual_data$age, baseline_data$age, labels_data$age, sounds_data$age)#
+#
+# here I just add 1 ms to the time for participants where the trial times are odd#
+# it's to line things up better to get the average looking at point#
+alldata$time <- (ceiling(alldata$time/2)*2)#
+#
+alldata$age <- c(visual_data$age, baseline_data$age, labels_data$age, sounds_data$age)#
+#
+alldata$cond <- as.factor(alldata$cond)#
+alldata$trial_type <- as.factor(alldata$trial_type)#
+#
+alldata <- as.data.frame(alldata)#
+testdata <- alldata[alldata$trial_type == 'test',]#
+#
+#################################################
+# EXCLUSIONS#
+#
+# remove subjects that completed less than half the experiment#
+testdata <- testdata[testdata$subj != 5222,]#
+testdata <- testdata[testdata$subj != 5280,]#
+testdata <- testdata[testdata$subj != 5320,]#
+testdata <- testdata[testdata$subj != 5332,]#
+testdata <- testdata[testdata$subj != 5340,]#
+testdata <- testdata[testdata$subj != 5346,]#
+testdata <- testdata[testdata$subj != 5361,]#
+testdata <- testdata[testdata$subj != 5355,]#
+testdata <- testdata[testdata$subj != 5356,]#
+testdata <- testdata[testdata$subj != 5423,]#
+#
+# remove subjets with less than 6 out of 24 valid trials (based on the analysis below;#
+# 'valid' trials are ones they looked at the two stimuli for at least 500 ms total#
+testdata <- testdata[testdata$subj != 5213,]  # 4 valid trials#
+testdata <- testdata[testdata$subj != 5371,]  # 4 valid trials#
+testdata <- testdata[testdata$subj != 5420,]  # 4 valid trials#
+testdata <- testdata[testdata$subj != 5377,]  # 5 valid trials#
+testdata <- testdata[testdata$subj != 5252,]  # 6 valid trials#
+#
+testdata <- testdata[testdata$subj != 5533,] # one valid trial, check this subj#
+# no age for this participant, can't find notes etc. remore for now until/if demographic info is tracked down#
+testdata <- testdata[testdata$subj != 5324,]#
+#
+testdata$sum <- testdata$correct + testdata$incorrect#
+#
+# get sum of looking to either correct or incorrect stimulus#
+total_looking <- tapply(testdata$sum, list(testdata$trial, testdata$subj), sum)#
+#
+# multiply by 2 since they are 2 ms points#
+total_looking <- total_looking * 2#
+#
+# get list indicating if that sum is greater than 500 ms#
+check_time <- total_looking > 500#
+#
+# this is a function to look at check_time and make a list of the subject/trial numbers of bad trials#
+Which.names <- function(DF, value) {#
+#
+    output <- NULL#
+	ind <- which(DF==value, arr.ind=TRUE)#
+	output$subject <- as.numeric(colnames(DF)[ind[,"col"]])#
+	output$trial <- as.numeric(rownames(DF)[ind[1:nrow(ind)]])#
+	output <- as.data.frame(output)#
+	return(output)#
+}#
+bad_trials <- Which.names(check_time, FALSE)#
+#
+num_bad_trials <- tapply(bad_trials$trial, bad_trials$subject, length)#
+num_bad_trials#
+#
+# this for loop removes bad trial data from the main datafile#
+# this takes a LONG time ~15 min#
+# I should really find a faster way to do this#
+for (i in 1:length(bad_trials[,1])) {#
+	testdata <- testdata[!(testdata$subj == bad_trials[i,]$subject & testdata$trial == bad_trials[i,]$trial),]#
+}
+child.data <- read.table('EBM_aics_children.txt', header=T)#
+adult.data <- read.table('EBM_aics_adults.txt', header=T)#
+bland.data <- read.table('EBM_aics_bland.txt', header=T)#
+child.data <- child.data[child.data$subj != 20162,]#
+child.data <- child.data[child.data$subj !=20163,]#
+child.data <- child.data[child.data$subj !=20164 ,]#
+child.data <- child.data[child.data$subj !=20169  ,]#
+child.data <- child.data[child.data$subj !=62036 ,]#
+child.data <- child.data[child.data$subj !=62037 ,]#
+child.data <- child.data[child.data$subj !=62038 ,]#
+child.data <- child.data[child.data$subj !=62039 ,]#
+child.data <- child.data[child.data$subj !=62040 ,]#
+child.data <- child.data[child.data$subj !=1111  ,]#
+child.data <- child.data[child.data$subj !=1112  ,]#
+child.data <- child.data[child.data$subj !=1113 ,]#
+child.data <- child.data[child.data$subj !=1114  ,]#
+child.data <- child.data[child.data$subj !=1115 ,]#
+child.data <- child.data[child.data$subj !=62041  ,]#
+child.data <- child.data[child.data$subj !=62042 ,]#
+child.data <- child.data[child.data$subj !=62043 ,]#
+#
+median(child.data$eb_Blag)#
+median(adult.data$eb_Blag)#
+median(bland.data$eb_Blag)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$eb_Blag)#
+hist(adult.data$eb_Blag)#
+hist(bland.data$eb_Blag)#
+#
+wilcox.test(child.data$eb_Blag , adult.data$eb_Blag, correct=F)#
+wilcox.test(child.data$eb_Blag , bland.data$eb_Blag, correct=F)#
+wilcox.test(adult.data$eb_Blag , bland.data$eb_Blag, correct=F)#
+#
+median(child.data$eb_Bev)#
+median(adult.data$eb_Bev)#
+median(bland.data$eb_Bev)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$eb_Bev)#
+hist(adult.data$eb_Bev)#
+hist(bland.data$eb_Bev)#
+#
+wilcox.test(child.data$eb_Bev , adult.data$eb_Bev, correct=F)#
+wilcox.test(child.data$eb_Bev , bland.data$eb_Bev, correct=F)#
+wilcox.test(adult.data$eb_Bev , bland.data$eb_Bev, correct=F)#
+#
+child.ratio <- child.data$eb_Bev/child.data$eb_Blag#
+adult.ratio <- adult.data$eb_Bev/adult.data$eb_Blag#
+#
+median(child.ratio)#
+median(adult.ratio)#
+#
+wilcox.test(child.ratio, adult.ratio, correct=F)#
+#
+#########
+median(child.data$ebm_weight)#
+median(adult.data$ebm_weight)#
+median(bland.data$ebm_weight)#
+#
+mean(child.data$ebm_weight)#
+mean(adult.data$ebm_weight)#
+mean(bland.data$ebm_weight)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children', xlab="weight")#
+hist(adult.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Adults', xlab='weight')#
+hist(bland.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children: exposed rewards', xlab='weight')#
+#
+wilcox.test(child.data$ebm_weight , adult.data$ebm_weight, correct=F)
+wilcox.test(child.data$ebm_Bev , adult.data$ebm_Bev, correct=F)
+barplot(child.data$ebm_weight[order(child.data$ebm_weight), xlim=c(0,1), main='Children'], col='blue')#
+barplot(adult.data$ebm_weight[order(adult.data$ebm_weight), xlim=c(0,1), main='Adults'], col = 'green', add =T)
+child.data <- read.table('EBM_aics_children.txt', header=T)#
+adult.data <- read.table('EBM_aics_adults.txt', header=T)#
+bland.data <- read.table('EBM_aics_bland.txt', header=T)#
+child.data <- child.data[child.data$subj != 20162,]#
+child.data <- child.data[child.data$subj !=20163,]#
+child.data <- child.data[child.data$subj !=20164 ,]#
+child.data <- child.data[child.data$subj !=20169  ,]#
+child.data <- child.data[child.data$subj !=62036 ,]#
+child.data <- child.data[child.data$subj !=62037 ,]#
+child.data <- child.data[child.data$subj !=62038 ,]#
+child.data <- child.data[child.data$subj !=62039 ,]#
+child.data <- child.data[child.data$subj !=62040 ,]#
+child.data <- child.data[child.data$subj !=1111  ,]#
+child.data <- child.data[child.data$subj !=1112  ,]#
+child.data <- child.data[child.data$subj !=1113 ,]#
+child.data <- child.data[child.data$subj !=1114  ,]#
+child.data <- child.data[child.data$subj !=1115 ,]#
+child.data <- child.data[child.data$subj !=62041  ,]#
+child.data <- child.data[child.data$subj !=62042 ,]#
+child.data <- child.data[child.data$subj !=62043 ,]#
+#
+median(child.data$eb_Blag)#
+median(adult.data$eb_Blag)#
+median(bland.data$eb_Blag)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$eb_Blag)#
+hist(adult.data$eb_Blag)#
+hist(bland.data$eb_Blag)#
+#
+wilcox.test(child.data$eb_Blag , adult.data$eb_Blag, correct=F)#
+wilcox.test(child.data$eb_Blag , bland.data$eb_Blag, correct=F)#
+wilcox.test(adult.data$eb_Blag , bland.data$eb_Blag, correct=F)#
+#
+median(child.data$eb_Bev)#
+median(adult.data$eb_Bev)#
+median(bland.data$eb_Bev)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$eb_Bev)#
+hist(adult.data$eb_Bev)#
+hist(bland.data$eb_Bev)#
+#
+wilcox.test(child.data$eb_Bev , adult.data$eb_Bev, correct=F)#
+wilcox.test(child.data$eb_Bev , bland.data$eb_Bev, correct=F)#
+wilcox.test(adult.data$eb_Bev , bland.data$eb_Bev, correct=F)#
+#
+child.ratio <- child.data$eb_Bev/child.data$eb_Blag#
+adult.ratio <- adult.data$eb_Bev/adult.data$eb_Blag#
+#
+median(child.ratio)#
+median(adult.ratio)#
+#
+wilcox.test(child.ratio, adult.ratio, correct=F)#
+#
+#########
+median(child.data$ebm_weight)#
+median(adult.data$ebm_weight)#
+median(bland.data$ebm_weight)#
+#
+mean(child.data$ebm_weight)#
+mean(adult.data$ebm_weight)#
+mean(bland.data$ebm_weight)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children', xlab="weight")#
+hist(adult.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Adults', xlab='weight')#
+hist(bland.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children: exposed rewards', xlab='weight')#
+#
+wilcox.test(child.data$ebm_weight , adult.data$ebm_weight, correct=F)#
+wilcox.test(child.data$ebm_weight , bland.data$ebm_weight, correct=F)#
+wilcox.test(bland.data$ebm_weight , adult.data$ebm_weight, correct=F)#
+wilcox.test(child.data$ebm_Bev , adult.data$ebm_Bev, correct=F)#
+wilcox.test(child.data$ebm_Bev , bland.data$ebm_Bev, correct=F)#
+wilcox.test(bland.data$ebm_Bev , adult.data$ebm_Bev, correct=F)#
+median(child.data$ebm_Bev)#
+median(adult.data$ebm_Bev)#
+median(bland.data$ebm_Bev)#
+#
+###################
+#
+par(mfrow=c(3,1))#
+barplot(child.data$ebm_weight[order(child.data$ebm_weight), xlim=c(0,1), main='Children'])#
+barplot(adult.data$ebm_weight[order(adult.data$ebm_weight), xlim=c(0,1), main='Adults'])#
+barplot(bland.data$ebm_weight[order(bland.data$ebm_weight), xlim=c(0,1), main='Exposed Rewards'])#
+barplot(child.data$ebm_weight[order(child.data$ebm_weight), xlim=c(0,1), main='Children'], col='blue')#
+barplot(adult.data$ebm_weight[order(adult.data$ebm_weight), xlim=c(0,1), main='Adults'], col = 'green', add =T)
+barplot(child.data$ebm_weight[order(child.data$ebm_weight)], ylim=c(0,1), main='Children', col='blue')#
+barplot(adult.data$ebm_weight[order(adult.data$ebm_weight)], ylim=c(0,1), main='Adults', col = 'green', add =T)
+barplot(child.data$ebm_weight[order(child.data$ebm_weight)], ylim=c(0,1), col='blue', main='Directed exploration', ylab='phi parameter')#
+barplot(adult.data$ebm_weight[order(adult.data$ebm_weight)],  col = 'green', add =T)
+barplot(c(0,0,child.data$ebm_weight[order(child.data$ebm_weight)]), ylim=c(0,1), col='blue', main='Directed exploration', ylab='phi parameter')#
+barplot(adult.data$ebm_weight[order(adult.data$ebm_weight)],  col = 'green', add =T)
+barplot(c(0,0,child.data$ebm_weight[order(child.data$ebm_weight)]), ylim=c(0,1), col='blue', main='Directed exploration', ylab='phi parameter')#
+barplot(adult.data$ebm_weight[order(adult.data$ebm_weight)],  col = 'green', xlab="Individual participants", add =T)
+par(mfrow=c(3,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children', xlab="weight")#
+hist(adult.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Adults', xlab='weight')#
+hist(bland.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children: exposed rewards', xlab='weight')
+par(mfrow=c(3,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children', xlab="weight", col = 'grey')#
+hist(adult.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Adults', xlab='weight', col = 'grey')#
+hist(bland.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children: exposed rewards', xlab='weight', col = 'grey')
+par(mfrow=c(3,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children', xlab="Phi", col = 'grey')#
+hist(adult.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Adults', xlab='Phi', col = 'grey')#
+hist(bland.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children: exposed rewards', xlab='Phi', col = 'grey')
+child.data <- read.table('EBM_aics_children.txt', header=T)#
+adult.data <- read.table('EBM_aics_adults.txt', header=T)#
+bland.data <- read.table('EBM_aics_bland.txt', header=T)#
+child.data <- child.data[child.data$subj != 20162,]#
+child.data <- child.data[child.data$subj !=20163,]#
+child.data <- child.data[child.data$subj !=20164 ,]#
+child.data <- child.data[child.data$subj !=20169  ,]#
+child.data <- child.data[child.data$subj !=62036 ,]#
+child.data <- child.data[child.data$subj !=62037 ,]#
+child.data <- child.data[child.data$subj !=62038 ,]#
+child.data <- child.data[child.data$subj !=62039 ,]#
+child.data <- child.data[child.data$subj !=62040 ,]#
+child.data <- child.data[child.data$subj !=1111  ,]#
+child.data <- child.data[child.data$subj !=1112  ,]#
+child.data <- child.data[child.data$subj !=1113 ,]#
+child.data <- child.data[child.data$subj !=1114  ,]#
+child.data <- child.data[child.data$subj !=1115 ,]#
+child.data <- child.data[child.data$subj !=62041  ,]#
+child.data <- child.data[child.data$subj !=62042 ,]#
+child.data <- child.data[child.data$subj !=62043 ,]#
+#
+median(child.data$eb_Blag)#
+median(adult.data$eb_Blag)#
+median(bland.data$eb_Blag)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$eb_Blag)#
+hist(adult.data$eb_Blag)#
+hist(bland.data$eb_Blag)#
+#
+wilcox.test(child.data$eb_Blag , adult.data$eb_Blag, correct=F)#
+wilcox.test(child.data$eb_Blag , bland.data$eb_Blag, correct=F)#
+wilcox.test(adult.data$eb_Blag , bland.data$eb_Blag, correct=F)#
+#
+median(child.data$eb_Bev)#
+median(adult.data$eb_Bev)#
+median(bland.data$eb_Bev)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$eb_Bev)#
+hist(adult.data$eb_Bev)#
+hist(bland.data$eb_Bev)#
+#
+wilcox.test(child.data$eb_Bev , adult.data$eb_Bev, correct=F)#
+wilcox.test(child.data$eb_Bev , bland.data$eb_Bev, correct=F)#
+wilcox.test(adult.data$eb_Bev , bland.data$eb_Bev, correct=F)#
+#
+child.ratio <- child.data$eb_Bev/child.data$eb_Blag#
+adult.ratio <- adult.data$eb_Bev/adult.data$eb_Blag#
+#
+median(child.ratio)#
+median(adult.ratio)#
+#
+wilcox.test(child.ratio, adult.ratio, correct=F)#
+#
+#########
+median(child.data$ebm_weight)#
+median(adult.data$ebm_weight)#
+median(bland.data$ebm_weight)#
+#
+mean(child.data$ebm_weight)#
+mean(adult.data$ebm_weight)#
+mean(bland.data$ebm_weight)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children', xlab="Phi", col = 'grey')#
+hist(adult.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Adults', xlab='Phi', col = 'grey')#
+hist(bland.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children: exposed rewards', xlab='Phi', col = 'grey')#
+#
+wilcox.test(child.data$ebm_weight , adult.data$ebm_weight, correct=F)#
+wilcox.test(child.data$ebm_weight , bland.data$ebm_weight, correct=F)#
+wilcox.test(bland.data$ebm_weight , adult.data$ebm_weight, correct=F)#
+wilcox.test(child.data$ebm_Bev , adult.data$ebm_Bev, correct=F)#
+wilcox.test(child.data$ebm_Bev , bland.data$ebm_Bev, correct=F)#
+wilcox.test(bland.data$ebm_Bev , adult.data$ebm_Bev, correct=F)#
+median(child.data$ebm_Bev)#
+median(adult.data$ebm_Bev)#
+median(bland.data$ebm_Bev)#
+#
+###################
+#
+par(mfrow=c(3,1))#
+barplot(child.data$ebm_weight[order(child.data$ebm_weight)], ylim=c(0,1), main='Children')#
+barplot(adult.data$ebm_weight[order(adult.data$ebm_weight)], ylim=c(0,1), main='Adults')#
+barplot(bland.data$ebm_weight[order(bland.data$ebm_weight)], ylim=c(0,1), main='Exposed Rewards')#
+barplot(c(0,0,child.data$ebm_weight[order(child.data$ebm_weight)]), ylim=c(0,1), col='blue', main='Directed exploration', ylab='phi parameter')#
+barplot(adult.data$ebm_weight[order(adult.data$ebm_weight)],  col = 'green', xlab="Individual participants", add =T)
+barplot(c(0,0,child.data$ebm_weight[order(child.data$ebm_weight)]), ylim=c(0,1), col='blue', main='Directed exploration', ylab='phi parameter')#
+barplot(adult.data$ebm_weight[order(adult.data$ebm_weight)],  col = 'green', xlab="Individual participants", add =T)
+barplot(c(0,0,child.data$ebm_weight[order(child.data$ebm_weight)]), ylim=c(0,1), col='blue', main='Directed exploration', ylab='phi parameter')
+barplot(adult.data$ebm_weight[order(adult.data$ebm_weight)],  col = 'green', xlab="Individual participants", ylim=c(0,1))
+barplot(c(0,0,child.data$ebm_weight[order(child.data$ebm_weight)]), ylim=c(0,1), col='blue', #
+main='Directed exploration', ylab='phi parameter', density = 0.8)
+barplot(c(0,0,child.data$ebm_weight[order(child.data$ebm_weight)]), ylim=c(0,1), col='blue', #
+main='Directed exploration', ylab='phi parameter', density = 80)
+barplot(c(0,0,child.data$ebm_weight[order(child.data$ebm_weight)]), ylim=c(0,1), col='blue', #
+main='Directed exploration', ylab='phi parameter', density = 50)
+barplot(c(0,0,child.data$ebm_weight[order(child.data$ebm_weight)]), ylim=c(0,1), col='blue', #
+main='Directed exploration', ylab='phi parameter', density = 40)
+barplot(c(0,0,child.data$ebm_weight[order(child.data$ebm_weight)]), ylim=c(0,1), col='blue', #
+main='Directed exploration', ylab='phi parameter', density = 30)
+barplot(adult.data$ebm_weight[order(adult.data$ebm_weight)],  col = 'green', xlab="Individual participants", ylim=c(0,1))
+child.data <- read.table('EBM_aics_children.txt', header=T)#
+adult.data <- read.table('EBM_aics_adults.txt', header=T)#
+bland.data <- read.table('EBM_aics_bland.txt', header=T)#
+child.data <- child.data[child.data$subj != 20162,]#
+child.data <- child.data[child.data$subj !=20163,]#
+child.data <- child.data[child.data$subj !=20164 ,]#
+child.data <- child.data[child.data$subj !=20169  ,]#
+child.data <- child.data[child.data$subj !=62036 ,]#
+child.data <- child.data[child.data$subj !=62037 ,]#
+child.data <- child.data[child.data$subj !=62038 ,]#
+child.data <- child.data[child.data$subj !=62039 ,]#
+child.data <- child.data[child.data$subj !=62040 ,]#
+child.data <- child.data[child.data$subj !=1111  ,]#
+child.data <- child.data[child.data$subj !=1112  ,]#
+child.data <- child.data[child.data$subj !=1113 ,]#
+child.data <- child.data[child.data$subj !=1114  ,]#
+child.data <- child.data[child.data$subj !=1115 ,]#
+child.data <- child.data[child.data$subj !=62041  ,]#
+child.data <- child.data[child.data$subj !=62042 ,]#
+child.data <- child.data[child.data$subj !=62043 ,]#
+#
+median(child.data$eb_Blag)#
+median(adult.data$eb_Blag)#
+median(bland.data$eb_Blag)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$eb_Blag)#
+hist(adult.data$eb_Blag)#
+hist(bland.data$eb_Blag)#
+#
+wilcox.test(child.data$eb_Blag , adult.data$eb_Blag, correct=F)#
+wilcox.test(child.data$eb_Blag , bland.data$eb_Blag, correct=F)#
+wilcox.test(adult.data$eb_Blag , bland.data$eb_Blag, correct=F)#
+#
+median(child.data$eb_Bev)#
+median(adult.data$eb_Bev)#
+median(bland.data$eb_Bev)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$eb_Bev)#
+hist(adult.data$eb_Bev)#
+hist(bland.data$eb_Bev)#
+#
+wilcox.test(child.data$eb_Bev , adult.data$eb_Bev, correct=F)#
+wilcox.test(child.data$eb_Bev , bland.data$eb_Bev, correct=F)#
+wilcox.test(adult.data$eb_Bev , bland.data$eb_Bev, correct=F)#
+#
+child.ratio <- child.data$eb_Bev/child.data$eb_Blag#
+adult.ratio <- adult.data$eb_Bev/adult.data$eb_Blag#
+#
+median(child.ratio)#
+median(adult.ratio)#
+#
+wilcox.test(child.ratio, adult.ratio, correct=F)#
+#
+#########
+median(child.data$ebm_weight)#
+median(adult.data$ebm_weight)#
+median(bland.data$ebm_weight)#
+#
+mean(child.data$ebm_weight)#
+mean(adult.data$ebm_weight)#
+mean(bland.data$ebm_weight)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children', xlab="Phi", col = 'grey')#
+hist(adult.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Adults', xlab='Phi', col = 'grey')#
+hist(bland.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children: exposed rewards', xlab='Phi', col = 'grey')#
+#
+wilcox.test(child.data$ebm_weight , adult.data$ebm_weight, correct=F)#
+wilcox.test(child.data$ebm_weight , bland.data$ebm_weight, correct=F)#
+wilcox.test(bland.data$ebm_weight , adult.data$ebm_weight, correct=F)#
+wilcox.test(child.data$ebm_Bev , adult.data$ebm_Bev, correct=F)#
+wilcox.test(child.data$ebm_Bev , bland.data$ebm_Bev, correct=F)#
+wilcox.test(bland.data$ebm_Bev , adult.data$ebm_Bev, correct=F)
+median(child.data$ebm_Bev)#
+median(adult.data$ebm_Bev)#
+median(bland.data$ebm_Bev)
+wilcox.test(adult.data$ebm_Bev , bland.data$ebm_Bev, correct=F)
+children.data <- read.table('aics_children_rotate.txt', header=T)#
+#
+children.data$lag_best <- as.numeric( (children.data$Lag < children.data$CW) & (children.data$Lag < children.data$CCW) )
+children.data
+child.data <- child.data[child.data$subj != 20162,]#
+child.data <- child.data[child.data$subj !=20163,]#
+child.data <- child.data[child.data$subj !=20164 ,]#
+child.data <- child.data[child.data$subj !=20169  ,]#
+child.data <- child.data[child.data$subj !=62036 ,]#
+child.data <- child.data[child.data$subj !=62037 ,]#
+child.data <- child.data[child.data$subj !=62038 ,]#
+child.data <- child.data[child.data$subj !=62039 ,]#
+child.data <- child.data[child.data$subj !=62040 ,]#
+child.data <- child.data[child.data$subj !=1111  ,]#
+child.data <- child.data[child.data$subj !=1112  ,]#
+child.data <- child.data[child.data$subj !=1113 ,]#
+child.data <- child.data[child.data$subj !=1114  ,]#
+child.data <- child.data[child.data$subj !=1115 ,]#
+child.data <- child.data[child.data$subj !=62041  ,]#
+child.data <- child.data[child.data$subj !=62042 ,]#
+child.data <- child.data[child.data$subj !=62043 ,]
+children.data <- children.data[children.data$subj != 20162,]#
+children.data <- children.data[children.data$subj !=20163,]#
+children.data <- children.data[children.data$subj !=20164 ,]#
+children.data <- children.data[children.data$subj !=20169  ,]#
+children.data <- children.data[children.data$subj !=62036 ,]#
+children.data <- children.data[children.data$subj !=62037 ,]#
+children.data <- children.data[children.data$subj !=62038 ,]#
+children.data <- children.data[children.data$subj !=62039 ,]#
+children.data <- children.data[children.data$subj !=62040 ,]#
+children.data <- children.data[children.data$subj !=1111  ,]#
+children.data <- children.data[children.data$subj !=1112  ,]#
+children.data <- children.data[children.data$subj !=1113 ,]#
+children.data <- children.data[children.data$subj !=1114  ,]#
+children.data <- children.data[children.data$subj !=1115 ,]#
+children.data <- children.data[children.data$subj !=62041  ,]#
+children.data <- children.data[children.data$subj !=62042 ,]#
+children.data <- children.data[children.data$subj !=62043 ,]
+children.data
+length(children.data$subj)
+model.data  <- read.table('aics_children.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)
+model_data
+model.data
+model.data <- model.data[model.data$subj !=1111  ,]#
+model.data <- model.data[model.data$subj !=1112  ,]#
+model.data <- model.data[model.data$subj !=1113 ,]#
+model.data <- model.data[model.data$subj !=1114  ,]#
+model.data <- model.data[model.data$subj !=1115 ,]#
+#
+model.data <- model.data[model.data$subj != 20162,]#
+model.data <- model.data[model.data$subj !=20163,]#
+model.data <- model.data[model.data$subj !=20164 ,]#
+model.data <- model.data[model.data$subj !=20169  ,]#
+#
+model.data <- model.data[model.data$subj !=62036 ,]#
+model.data <- model.data[model.data$subj !=62037 ,]#
+model.data <- model.data[model.data$subj !=62038 ,]#
+model.data <- model.data[model.data$subj !=62039 ,]#
+model.data <- model.data[model.data$subj !=62040 ,]#
+model.data <- model.data[model.data$subj !=62041  ,]#
+model.data <- model.data[model.data$subj !=62042 ,]#
+model.data <- model.data[model.data$subj !=62043 ,]
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+#
+sum(as.numeric(model.data$lag_over_RL))#
+#
+sum(as.numeric(model.data$RL_best2))#
+sum(as.numeric(model.data$bias_best2))#
+sum(as.numeric(model.data$lag_best2))
+model.data
+model.data  <- read.table('aics_adults.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+#
+# to look at lag parameters for only those best fit by lag instead of bias#
+model.data <- model.data[model.data$lag_over_bias == T,]#
+#
+adult.bev <- model.data$Bev#
+adult.blag <- model.data$Blag#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+sum(as.numeric(model.data$lag_over_RL))
+model.data  <- read.table('aics_children.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+# remove the children from the novelty condition to only look at baseline#
+#
+model.data <- model.data[model.data$subj !=1111  ,]#
+model.data <- model.data[model.data$subj !=1112  ,]#
+model.data <- model.data[model.data$subj !=1113 ,]#
+model.data <- model.data[model.data$subj !=1114  ,]#
+model.data <- model.data[model.data$subj !=1115 ,]#
+#
+model.data <- model.data[model.data$subj != 20162,]#
+model.data <- model.data[model.data$subj !=20163,]#
+model.data <- model.data[model.data$subj !=20164 ,]#
+model.data <- model.data[model.data$subj !=20169  ,]#
+#
+model.data <- model.data[model.data$subj !=62036 ,]#
+model.data <- model.data[model.data$subj !=62037 ,]#
+model.data <- model.data[model.data$subj !=62038 ,]#
+model.data <- model.data[model.data$subj !=62039 ,]#
+model.data <- model.data[model.data$subj !=62040 ,]#
+model.data <- model.data[model.data$subj !=62041  ,]#
+model.data <- model.data[model.data$subj !=62042 ,]#
+model.data <- model.data[model.data$subj !=62043 ,]#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+#
+sum(as.numeric(model.data$lag_over_RL))#
+#
+sum(as.numeric(model.data$RL_best2))#
+sum(as.numeric(model.data$bias_best2))#
+sum(as.numeric(model.data$lag_best2))#
+#
+# to look at lag parameters for only those best fit by lag instead of bias#
+#model.data <- model.data[model.data$lag_over_bias == T,]#
+#
+child.bev <- model.data$Bev#
+child.blag <- model.data$Blag#
+> length(model.data$subj)#
+[1] 32#
+> #
+> sum(as.numeric(model.data$RL_best))#
+[1] 6#
+> sum(as.numeric(model.data$switch_best))#
+[1] 2#
+> sum(as.numeric(model.data$auto_best))#
+[1] 4#
+> sum(as.numeric(model.data$lag_best))#
+[1] 19#
+> sum(as.numeric(model.data$bias_best))#
+[1] 1#
+model.data$RL_nllh <- (model.data$RL-4)/2#
+model.data$lag_nllh <- (model.data$lag-6)/2
+model.data
+length(model.data[,1])
+for (i in length(model.data[,1])) {#
+	lr.test(model.data$RL_nllh[i], model.data$lag_nllh[i],df=1, alpha=0.05)#
+}
+library(extRemes)
+install.packages(extRemes)
+for (i in length(model.data[,1])) {#
+	lrtest(model.data$RL_nllh[i], model.data$lag_nllh[i],df=1, alpha=0.05)#
+}
+for (i in length(model.data[,1])) {#
+	LR.test(model.data$RL_nllh[i], model.data$lag_nllh[i],df=1, alpha=0.05)#
+}
+library(epicalc)
+install.packages('extRemes')
+library(extRemes)
+for (i in length(model.data[,1])) {#
+	lr.test(model.data$RL_nllh[i], model.data$lag_nllh[i],df=1, alpha=0.05)#
+}
+for (i in length(model.data[,1])) {#
+	x<-lr.test(model.data$RL_nllh[i], model.data$lag_nllh[i],df=1, alpha=0.05)#
+	summary(x)#
+}
+for (i in length(model.data[,1])) {#
+	x<-lr.test(model.data$RL_nllh[i], model.data$lag_nllh[i],df=1, alpha=0.05)#
+	print(x)#
+}
+model.data$RL_nllh[1]
+model.data$RL_nllh[20]
+for (i in seq(length(model.data[,1])) {#
+	x<-lr.test(model.data$RL_nllh[i], model.data$lag_nllh[i],df=1, alpha=0.05)#
+	print(x)#
+}
+for (i in seq(length(model.data[,1]))) {#
+	x<-lr.test(model.data$RL_nllh[i], model.data$lag_nllh[i],df=1, alpha=0.05)#
+	print(x)#
+}
+lr.test(sum(model.data$RL_nllh), sum(model.data$lag_nllh), df=length(model.data$RL_nllh), alpha=0.05)
+model.data  <- read.table('aics_adults.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+#
+# to look at lag parameters for only those best fit by lag instead of bias#
+model.data <- model.data[model.data$lag_over_bias == T,]#
+#
+adult.bev <- model.data$Bev#
+adult.blag <- model.data$Blag#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+sum(as.numeric(model.data$lag_over_RL))#
+sum(as.numeric(model.data$RL_best2))#
+sum(as.numeric(model.data$bias_best2))#
+sum(as.numeric(model.data$lag_best2))#
+#
+> sum(as.numeric(model.data$RL_best))#
+[1] 11#
+> sum(as.numeric(model.data$switch_best))#
+[1] 1#
+> sum(as.numeric(model.data$auto_best))#
+[1] 0#
+> sum(as.numeric(model.data$lag_best))#
+[1] 20#
+> sum(as.numeric(model.data$bias_best))#
+[1] 2#
+model.data$RL_nllh <- (model.data$RL-4)/2#
+model.data$lag_nllh <- (model.data$lag-6)/2#
+#
+library(extRemes)#
+#
+for (i in seq(length(model.data[,1]))) {#
+	x<-lr.test(model.data$RL_nllh[i], model.data$lag_nllh[i],df=1, alpha=0.05)#
+	print(x)#
+}#
+lr.test(sum(model.data$RL_nllh), sum(model.data$lag_nllh), df=length(model.data$RL_nllh), alpha=0.05)
+model.data  <- read.table('aics_bland.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+# to look at lag parameters for only those best fit by lag instead of bias#
+#model.data <- model.data[model.data$lag_over_bias == T,]#
+#
+bland.bev <- model.data$Bev#
+bland.blag <- model.data$Blag#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+sum(as.numeric(model.data$lag_over_bias))
+sum(as.numeric(model.data$lag_over_RL))
+model.data  <- read.table('aics_children.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+# remove the children from the novelty condition to only look at baseline#
+#
+model.data <- model.data[model.data$subj !=1111  ,]#
+model.data <- model.data[model.data$subj !=1112  ,]#
+model.data <- model.data[model.data$subj !=1113 ,]#
+model.data <- model.data[model.data$subj !=1114  ,]#
+model.data <- model.data[model.data$subj !=1115 ,]#
+#
+model.data <- model.data[model.data$subj != 20162,]#
+model.data <- model.data[model.data$subj !=20163,]#
+model.data <- model.data[model.data$subj !=20164 ,]#
+model.data <- model.data[model.data$subj !=20169  ,]#
+#
+model.data <- model.data[model.data$subj !=62036 ,]#
+model.data <- model.data[model.data$subj !=62037 ,]#
+model.data <- model.data[model.data$subj !=62038 ,]#
+model.data <- model.data[model.data$subj !=62039 ,]#
+model.data <- model.data[model.data$subj !=62040 ,]#
+model.data <- model.data[model.data$subj !=62041  ,]#
+model.data <- model.data[model.data$subj !=62042 ,]#
+model.data <- model.data[model.data$subj !=62043 ,]#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+#
+sum(as.numeric(model.data$lag_over_RL))
+model.data
+model.data  <- read.table('aics_adults.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+#
+# to look at lag parameters for only those best fit by lag instead of bias#
+model.data <- model.data[model.data$lag_over_bias == T,]#
+#
+adult.bev <- model.data$Bev#
+adult.blag <- model.data$Blag#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+sum(as.numeric(model.data$lag_over_RL))
+model.data
+model.data  <- read.table('aics_adults.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+#
+# to look at lag parameters for only those best fit by lag instead of bias#
+adult.bev <- model.data$Bev#
+adult.blag <- model.data$Blag#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+sum(as.numeric(model.data$lag_over_RL))
+model.data  <- read.table('aics_bland.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+# to look at lag parameters for only those best fit by lag instead of bias#
+#model.data <- model.data[model.data$lag_over_bias == T,]#
+#
+bland.bev <- model.data$Bev#
+bland.blag <- model.data$Blag#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+sum(as.numeric(model.data$lag_over_bias))
+sum(as.numeric(model.data$lag_over_RL))
+child.data <- read.table('EBM_aics_children.txt', header=T)#
+adult.data <- read.table('EBM_aics_adults.txt', header=T)#
+bland.data <- read.table('EBM_aics_bland.txt', header=T)#
+child.data <- child.data[child.data$subj != 20162,]#
+child.data <- child.data[child.data$subj !=20163,]#
+child.data <- child.data[child.data$subj !=20164 ,]#
+child.data <- child.data[child.data$subj !=20169  ,]#
+child.data <- child.data[child.data$subj !=62036 ,]#
+child.data <- child.data[child.data$subj !=62037 ,]#
+child.data <- child.data[child.data$subj !=62038 ,]#
+child.data <- child.data[child.data$subj !=62039 ,]#
+child.data <- child.data[child.data$subj !=62040 ,]#
+child.data <- child.data[child.data$subj !=1111  ,]#
+child.data <- child.data[child.data$subj !=1112  ,]#
+child.data <- child.data[child.data$subj !=1113 ,]#
+child.data <- child.data[child.data$subj !=1114  ,]#
+child.data <- child.data[child.data$subj !=1115 ,]#
+child.data <- child.data[child.data$subj !=62041  ,]#
+child.data <- child.data[child.data$subj !=62042 ,]#
+child.data <- child.data[child.data$subj !=62043 ,]#
+#
+median(child.data$eb_Blag)#
+median(adult.data$eb_Blag)#
+median(bland.data$eb_Blag)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$eb_Blag)#
+hist(adult.data$eb_Blag)#
+hist(bland.data$eb_Blag)#
+#
+wilcox.test(child.data$eb_Blag , adult.data$eb_Blag, correct=F)#
+wilcox.test(child.data$eb_Blag , bland.data$eb_Blag, correct=F)#
+wilcox.test(adult.data$eb_Blag , bland.data$eb_Blag, correct=F)#
+#
+median(child.data$eb_Bev)#
+median(adult.data$eb_Bev)#
+median(bland.data$eb_Bev)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$eb_Bev)#
+hist(adult.data$eb_Bev)#
+hist(bland.data$eb_Bev)#
+#
+wilcox.test(child.data$eb_Bev , adult.data$eb_Bev, correct=F)#
+wilcox.test(child.data$eb_Bev , bland.data$eb_Bev, correct=F)#
+wilcox.test(adult.data$eb_Bev , bland.data$eb_Bev, correct=F)#
+#
+child.ratio <- child.data$eb_Bev/child.data$eb_Blag#
+adult.ratio <- adult.data$eb_Bev/adult.data$eb_Blag#
+#
+median(child.ratio)#
+median(adult.ratio)#
+#
+wilcox.test(child.ratio, adult.ratio, correct=F)#
+#
+#########
+median(child.data$ebm_weight)#
+median(adult.data$ebm_weight)#
+median(bland.data$ebm_weight)#
+#
+mean(child.data$ebm_weight)#
+mean(adult.data$ebm_weight)#
+mean(bland.data$ebm_weight)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children', xlab="Phi", col = 'grey')#
+hist(adult.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Adults', xlab='Phi', col = 'grey')#
+hist(bland.data$ebm_weight, xlim=c(0,1), ylim=c(0,25), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children: exposed rewards', xlab='Phi', col = 'grey')#
+#
+wilcox.test(child.data$ebm_weight , adult.data$ebm_weight, correct=F)#
+wilcox.test(child.data$ebm_weight , bland.data$ebm_weight, correct=F)#
+wilcox.test(bland.data$ebm_weight , adult.data$ebm_weight, correct=F)#
+wilcox.test(child.data$ebm_Bev , adult.data$ebm_Bev, correct=F)#
+wilcox.test(child.data$ebm_Bev , bland.data$ebm_Bev, correct=F)#
+wilcox.test(bland.data$ebm_Bev , adult.data$ebm_Bev, correct=F)#
+median(child.data$ebm_Bev)#
+median(adult.data$ebm_Bev)#
+median(bland.data$ebm_Bev)
+child.data[1,]
+adult.data[1,]
+length(child.data$ebm_aic)
+length(adult.data$ebm_aic)
+sum(child.data$ebm_aic)
+sum(adult.data$ebm_aic)
+model.data  <- read.table('aics_children.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+# remove the children from the novelty condition to only look at baseline#
+#
+model.data <- model.data[model.data$subj !=1111  ,]#
+model.data <- model.data[model.data$subj !=1112  ,]#
+model.data <- model.data[model.data$subj !=1113 ,]#
+model.data <- model.data[model.data$subj !=1114  ,]#
+model.data <- model.data[model.data$subj !=1115 ,]#
+#
+model.data <- model.data[model.data$subj != 20162,]#
+model.data <- model.data[model.data$subj !=20163,]#
+model.data <- model.data[model.data$subj !=20164 ,]#
+model.data <- model.data[model.data$subj !=20169  ,]#
+#
+model.data <- model.data[model.data$subj !=62036 ,]#
+model.data <- model.data[model.data$subj !=62037 ,]#
+model.data <- model.data[model.data$subj !=62038 ,]#
+model.data <- model.data[model.data$subj !=62039 ,]#
+model.data <- model.data[model.data$subj !=62040 ,]#
+model.data <- model.data[model.data$subj !=62041  ,]#
+model.data <- model.data[model.data$subj !=62042 ,]#
+model.data <- model.data[model.data$subj !=62043 ,]#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+#
+sum(as.numeric(model.data$lag_over_RL))#
+#
+sum(as.numeric(model.data$RL_best2))#
+sum(as.numeric(model.data$bias_best2))#
+sum(as.numeric(model.data$lag_best2))#
+#
+# to look at lag parameters for only those best fit by lag instead of bias#
+#model.data <- model.data[model.data$lag_over_bias == T,]#
+#
+child.bev <- model.data$Bev#
+child.blag <- model.data$Blag#
+> length(model.data$subj)#
+[1] 32#
+> #
+> sum(as.numeric(model.data$RL_best))#
+[1] 6#
+> sum(as.numeric(model.data$switch_best))#
+[1] 2#
+> sum(as.numeric(model.data$auto_best))#
+[1] 4#
+> sum(as.numeric(model.data$lag_best))#
+[1] 19#
+> sum(as.numeric(model.data$bias_best))#
+[1] 1#
+model.data$RL_nllh <- (model.data$RL-4)/2#
+model.data$lag_nllh <- (model.data$lag-6)/2#
+#
+library(extRemes)#
+#
+for (i in seq(length(model.data[,1]))) {#
+	x<-lr.test(model.data$RL_nllh[i], model.data$lag_nllh[i],df=1, alpha=0.05)#
+	print(x)#
+}#
+lr.test(sum(model.data$RL_nllh), sum(model.data$lag_nllh), df=length(model.data$RL_nllh), alpha=0.05)#
+#
+model.data  <- read.table('aics_adults.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+#
+# to look at lag parameters for only those best fit by lag instead of bias
+model.data <- model.data[model.data$subj !=62041  ,]#
+model.data <- model.data[model.data$subj !=62042 ,]#
+model.data <- model.data[model.data$subj !=62043 ,]#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+#
+sum(as.numeric(model.data$lag_over_RL))#
+#
+sum(as.numeric(model.data$RL_best2))#
+sum(as.numeric(model.data$bias_best2))#
+sum(as.numeric(model.data$lag_best2))#
+#
+# to look at lag parameters for only those best fit by lag instead of bias#
+#model.data <- model.data[model.data$lag_over_bias == T,]#
+#
+child.bev <- model.data$Bev#
+child.blag <- model.data$Blag
+model.data[1,]
+length(model.data$RL)
+model.data
+model.data  <- read.table('aics_children.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+# remove the children from the novelty condition to only look at baseline#
+#
+model.data <- model.data[model.data$subj !=1111  ,]#
+model.data <- model.data[model.data$subj !=1112  ,]#
+model.data <- model.data[model.data$subj !=1113 ,]#
+model.data <- model.data[model.data$subj !=1114  ,]#
+model.data <- model.data[model.data$subj !=1115 ,]#
+#
+model.data <- model.data[model.data$subj != 20162,]#
+model.data <- model.data[model.data$subj !=20163,]#
+model.data <- model.data[model.data$subj !=20164 ,]#
+model.data <- model.data[model.data$subj !=20169  ,]#
+#
+model.data <- model.data[model.data$subj !=62036 ,]#
+model.data <- model.data[model.data$subj !=62037 ,]#
+model.data <- model.data[model.data$subj !=62038 ,]#
+model.data <- model.data[model.data$subj !=62039 ,]#
+model.data <- model.data[model.data$subj !=62040 ,]#
+model.data <- model.data[model.data$subj !=62041  ,]#
+model.data <- model.data[model.data$subj !=62042 ,]#
+model.data <- model.data[model.data$subj !=62043 ,]#
+length(model.data$subj)
+sum(model.data$RL)
+model.data  <- read.table('aics_adults.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+#
+# to look at lag parameters for only those best fit by lag instead of bias#
+adult.bev <- model.data$Bev#
+adult.blag <- model.data$Blag
+length(model.data$RL)
+sum(model.data$RL)
+model.data  <- read.table('aics_40_trials.txt', header=T)#
+#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)
+model.data  <- read.table('aics_40_trials_BL.txt', header=T)#
+#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)
+model.data
+model.data  <- read.table('aics_bland.txt', header=T)#
+#
+#model.data  <- read.table('aics_40_trials_BL.txt', header=T)#
+#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+# remove the children from the novelty condition to only look at baseline#
+#
+model.data <- model.data[model.data$subj !=1111  ,]#
+model.data <- model.data[model.data$subj !=1112  ,]#
+model.data <- model.data[model.data$subj !=1113 ,]#
+model.data <- model.data[model.data$subj !=1114  ,]#
+model.data <- model.data[model.data$subj !=1115 ,]#
+#
+model.data <- model.data[model.data$subj != 20162,]#
+model.data <- model.data[model.data$subj !=20163,]#
+model.data <- model.data[model.data$subj !=20164 ,]#
+model.data <- model.data[model.data$subj !=20169  ,]#
+#
+model.data <- model.data[model.data$subj !=62036 ,]#
+model.data <- model.data[model.data$subj !=62037 ,]#
+model.data <- model.data[model.data$subj !=62038 ,]#
+model.data <- model.data[model.data$subj !=62039 ,]#
+model.data <- model.data[model.data$subj !=62040 ,]#
+model.data <- model.data[model.data$subj !=62041  ,]#
+model.data <- model.data[model.data$subj !=62042 ,]#
+model.data <- model.data[model.data$subj !=62043 ,]#
+length(model.data$subj)#
+#
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$switch_best))#
+sum(as.numeric(model.data$auto_best))#
+sum(as.numeric(model.data$lag_best))#
+sum(as.numeric(model.data$bias_best))#
+#
+sum(as.numeric(model.data$lag_over_bias))#
+#
+sum(as.numeric(model.data$lag_over_RL))#
+#
+sum(as.numeric(model.data$RL_best2))#
+sum(as.numeric(model.data$bias_best2))#
+sum(as.numeric(model.data$lag_best2))
+#model.data  <- read.table('aics_children.txt', header=T)#
+#
+#model.data  <- read.table('aics_bland.txt', header=T)#
+#
+#model.data  <- read.table('aics_40_trials_BL.txt', header=T)#
+#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL
+model.data  <- read.table('aics_children.txt', header=T)#
+#
+#model.data  <- read.table('aics_bland.txt', header=T)#
+#
+#model.data  <- read.table('aics_40_trials_BL.txt', header=T)#
+#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL
+model.data$lag_over_RL
+as.numeric(model.data$lag_over_RL)
+# remove the children from the novelty condition to only look at baseline#
+#
+model.data <- model.data[model.data$subj !=1111  ,]#
+model.data <- model.data[model.data$subj !=1112  ,]#
+model.data <- model.data[model.data$subj !=1113 ,]#
+model.data <- model.data[model.data$subj !=1114  ,]#
+model.data <- model.data[model.data$subj !=1115 ,]#
+#
+model.data <- model.data[model.data$subj != 20162,]#
+model.data <- model.data[model.data$subj !=20163,]#
+model.data <- model.data[model.data$subj !=20164 ,]#
+model.data <- model.data[model.data$subj !=20169  ,]#
+#
+model.data <- model.data[model.data$subj !=62036 ,]#
+model.data <- model.data[model.data$subj !=62037 ,]#
+model.data <- model.data[model.data$subj !=62038 ,]#
+model.data <- model.data[model.data$subj !=62039 ,]#
+model.data <- model.data[model.data$subj !=62040 ,]#
+model.data <- model.data[model.data$subj !=62041  ,]#
+model.data <- model.data[model.data$subj !=62042 ,]#
+model.data <- model.data[model.data$subj !=62043 ,]
+as.numeric(model.data$lag_over_RL)
+length(model.data$lag_over_RL)
+sum(as.numeric(model.data$lag_over_RL))
+model.data  <- read.table('aics_adult.txt', header=T)#
+#
+#model.data  <- read.table('aics_bland.txt', header=T)#
+#
+#model.data  <- read.table('aics_40_trials_BL.txt', header=T)#
+#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+# remove the children from the novelty condition to only look at baseline#
+#
+model.data <- model.data[model.data$subj !=1111  ,]#
+model.data <- model.data[model.data$subj !=1112  ,]#
+model.data <- model.data[model.data$subj !=1113 ,]#
+model.data <- model.data[model.data$subj !=1114  ,]#
+model.data <- model.data[model.data$subj !=1115 ,]#
+#
+model.data <- model.data[model.data$subj != 20162,]#
+model.data <- model.data[model.data$subj !=20163,]#
+model.data <- model.data[model.data$subj !=20164 ,]#
+model.data <- model.data[model.data$subj !=20169  ,]#
+#
+model.data <- model.data[model.data$subj !=62036 ,]#
+model.data <- model.data[model.data$subj !=62037 ,]#
+model.data <- model.data[model.data$subj !=62038 ,]#
+model.data <- model.data[model.data$subj !=62039 ,]#
+model.data <- model.data[model.data$subj !=62040 ,]#
+model.data <- model.data[model.data$subj !=62041  ,]#
+model.data <- model.data[model.data$subj !=62042 ,]#
+model.data <- model.data[model.data$subj !=62043 ,]
+model.data  <- read.table('aics_adults.txt', header=T)#
+#
+#model.data  <- read.table('aics_bland.txt', header=T)#
+#
+#model.data  <- read.table('aics_40_trials_BL.txt', header=T)#
+#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+model.data$RL_best <- (model.data$RL < model.data$switch) & (model.data$RL < model.data$bias) & (model.data$RL < model.data$RL_auto) & (model.data$RL < model.data$lag)#
+model.data$switch_best <- (model.data$switch < model.data$RL) & (model.data$switch < model.data$bias) & (model.data$switch < model.data$RL_auto) & (model.data$switch < model.data$lag)#
+model.data$auto_best <- (model.data$RL_auto < model.data$RL) & (model.data$RL_auto < model.data$bias) & (model.data$RL_auto < model.data$switch) & (model.data$RL_auto < model.data$lag)#
+model.data$lag_best <- (model.data$lag < model.data$RL) & (model.data$lag < model.data$bias) & (model.data$lag < model.data$switch) & (model.data$lag < model.data$RL_auto)#
+model.data$bias_best <- (model.data$bias < model.data$RL) & (model.data$bias < model.data$lag) & (model.data$bias < model.data$switch) & (model.data$bias < model.data$RL_auto)#
+#
+model.data$lag_over_bias <- model.data$lag < model.data$bias#
+model.data$lag_over_RL <- model.data$lag < model.data$RL#
+#
+model.data$lag_best2 <- (model.data$lag < model.data$bias) & (model.data$lag < model.data$RL)#
+model.data$RL_best2 <- (model.data$RL < model.data$bias) & (model.data$RL < model.data$lag)#
+model.data$bias_best2 <- (model.data$bias < model.data$lag) & (model.data$bias < model.data$RL)#
+# remove the children from the novelty condition to only look at baseline#
+#
+model.data <- model.data[model.data$subj !=1111  ,]#
+model.data <- model.data[model.data$subj !=1112  ,]#
+model.data <- model.data[model.data$subj !=1113 ,]#
+model.data <- model.data[model.data$subj !=1114  ,]#
+model.data <- model.data[model.data$subj !=1115 ,]#
+#
+model.data <- model.data[model.data$subj != 20162,]#
+model.data <- model.data[model.data$subj !=20163,]#
+model.data <- model.data[model.data$subj !=20164 ,]#
+model.data <- model.data[model.data$subj !=20169  ,]#
+#
+model.data <- model.data[model.data$subj !=62036 ,]#
+model.data <- model.data[model.data$subj !=62037 ,]#
+model.data <- model.data[model.data$subj !=62038 ,]#
+model.data <- model.data[model.data$subj !=62039 ,]#
+model.data <- model.data[model.data$subj !=62040 ,]#
+model.data <- model.data[model.data$subj !=62041  ,]#
+model.data <- model.data[model.data$subj !=62042 ,]#
+model.data <- model.data[model.data$subj !=62043 ,]
+sum(as.numeric(model.data$lag_over_RL))
+length(model.data$lag_over_RL)
+children.data <- read.table('aics_children_rotate.txt', header=T)#
+#
+children.data$lag_best <- as.numeric( (children.data$Lag < children.data$CW) & (children.data$Lag < children.data$CCW) )#
+children.data <- children.data[children.data$subj != 20162,]#
+children.data <- children.data[children.data$subj !=20163,]#
+children.data <- children.data[children.data$subj !=20164 ,]#
+children.data <- children.data[children.data$subj !=20169  ,]#
+children.data <- children.data[children.data$subj !=62036 ,]#
+children.data <- children.data[children.data$subj !=62037 ,]#
+children.data <- children.data[children.data$subj !=62038 ,]#
+children.data <- children.data[children.data$subj !=62039 ,]#
+children.data <- children.data[children.data$subj !=62040 ,]#
+children.data <- children.data[children.data$subj !=1111  ,]#
+children.data <- children.data[children.data$subj !=1112  ,]#
+children.data <- children.data[children.data$subj !=1113 ,]#
+children.data <- children.data[children.data$subj !=1114  ,]#
+children.data <- children.data[children.data$subj !=1115 ,]#
+children.data <- children.data[children.data$subj !=62041  ,]#
+children.data <- children.data[children.data$subj !=62042 ,]#
+children.data <- children.data[children.data$subj !=62043 ,]
+children.data
+par(mfrow=c(2,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), ylim=c(0,20), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children', xlab="Phi", col = 'blue', density=45, border='black')#
+hist(adult.data$ebm_weight, xlim=c(0,1), ylim=c(0,20), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Adults', xlab='Phi', col = 'green', density=45, border='black')
+child.data <- read.table('EBM_aics_children.txt', header=T)#
+adult.data <- read.table('EBM_aics_adults.txt', header=T)#
+bland.data <- read.table('EBM_aics_bland.txt', header=T)#
+child.data <- child.data[child.data$subj != 20162,]#
+child.data <- child.data[child.data$subj !=20163,]#
+child.data <- child.data[child.data$subj !=20164 ,]#
+child.data <- child.data[child.data$subj !=20169  ,]#
+child.data <- child.data[child.data$subj !=62036 ,]#
+child.data <- child.data[child.data$subj !=62037 ,]#
+child.data <- child.data[child.data$subj !=62038 ,]#
+child.data <- child.data[child.data$subj !=62039 ,]#
+child.data <- child.data[child.data$subj !=62040 ,]#
+child.data <- child.data[child.data$subj !=1111  ,]#
+child.data <- child.data[child.data$subj !=1112  ,]#
+child.data <- child.data[child.data$subj !=1113 ,]#
+child.data <- child.data[child.data$subj !=1114  ,]#
+child.data <- child.data[child.data$subj !=1115 ,]#
+child.data <- child.data[child.data$subj !=62041  ,]#
+child.data <- child.data[child.data$subj !=62042 ,]#
+child.data <- child.data[child.data$subj !=62043 ,]#
+#
+median(child.data$eb_Blag)#
+median(adult.data$eb_Blag)#
+median(bland.data$eb_Blag)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$eb_Blag)#
+hist(adult.data$eb_Blag)#
+hist(bland.data$eb_Blag)#
+#
+wilcox.test(child.data$eb_Blag , adult.data$eb_Blag, correct=F)#
+wilcox.test(child.data$eb_Blag , bland.data$eb_Blag, correct=F)#
+wilcox.test(adult.data$eb_Blag , bland.data$eb_Blag, correct=F)#
+#
+median(child.data$eb_Bev)#
+median(adult.data$eb_Bev)#
+median(bland.data$eb_Bev)#
+#
+par(mfrow=c(3,1))#
+hist(child.data$eb_Bev)#
+hist(adult.data$eb_Bev)#
+hist(bland.data$eb_Bev)#
+#
+wilcox.test(child.data$eb_Bev , adult.data$eb_Bev, correct=F)#
+wilcox.test(child.data$eb_Bev , bland.data$eb_Bev, correct=F)#
+wilcox.test(adult.data$eb_Bev , bland.data$eb_Bev, correct=F)#
+#
+child.ratio <- child.data$eb_Bev/child.data$eb_Blag#
+adult.ratio <- adult.data$eb_Bev/adult.data$eb_Blag#
+#
+median(child.ratio)#
+median(adult.ratio)#
+#
+wilcox.test(child.ratio, adult.ratio, correct=F)#
+#
+#########
+median(child.data$ebm_weight)#
+median(adult.data$ebm_weight)#
+median(bland.data$ebm_weight)#
+#
+mean(child.data$ebm_weight)#
+mean(adult.data$ebm_weight)#
+mean(bland.data$ebm_weight)#
+#
+par(mfrow=c(2,1))#
+hist(child.data$ebm_weight, xlim=c(0,1), ylim=c(0,20), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Children', xlab="Phi", col = 'blue', density=45, border='black')#
+hist(adult.data$ebm_weight, xlim=c(0,1), ylim=c(0,20), breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), main='Adults', xlab='Phi', col = 'green', density=45, border='black')
+setwd("/Users/nathanblanco/Dropbox/Work/current_projects/exploration studies/Baseline/data")
+alldata <- read.table('door_data_adults.txt', header=F)#
+#alldata <- read.table('door_data_children.txt', header=F)#
+#
+#self.subj, 'main', self.trial, self.cond, res, rt, payoff, self.earnings, str(self.rewards[int(res)])+'candy'+self.candy_types[int(res)]+'-bland.png', door_index, chose_door, self.rewards])#
+names(alldata) <- c('subj', 'phase', 'trial', 'cond', 'res', 'rt', 'reward', 'total', 'image', 'door_loc', 'door_chose', 'r1', 'r2', 'r3', 'r4')#
+#
+alldata$door_reward#
+for (i in 1:length(alldata[,1])) {#
+	alldata$door_reward[i] <- alldata[i,12+alldata$door_loc[i]]#
+}#
+alldata$stay <- NULL#
+for (i in 1:length(alldata[,1])) {#
+    alldata$stay[i] <- as.numeric(alldata[i,]$res == alldata[i-1,]$res)#
+    if (alldata[i,]$trial == 1) { alldata$stay[i] <- 0 }#
+    }#
+#
+stay_total <- tapply(alldata$stay, alldata$subj, sum)#
+#
+for (i in 1:length(stay_total)) {#
+	x <- binom.test(stay_total[i], 100, 0.25)#
+	print(x)#
+}#
+#
+for (i in seq(100)) {#
+	x <- binom.test(i, 100, 0.25)#
+	print(x)#
+}#
+#
+65-83#
+#
+#binom.test(x, n, p = 0.5,#
+#           alternative = c("two.sided", "less", "greater"),#
+#           conf.level = 0.95)#
+stay_props <- tapply(alldata$stay, alldata$subj, mean)#
+#
+hist(stay_props, main= "Children:  Stay proportions", xlab="Proportion of repeat responses", col='grey')#
+#
+barplot(stay_props[order(stay_props)],#
+		main ='',#
+		ylim=c(0,1),#
+		ylab="Proportion of repeat responses",#
+		xlab="Participant")#
+barplot(1-stay_props[order(stay_props)],#
+		main ="Childrens's Switch Responses",#
+		ylim=c(0,1),#
+		ylab="Proportion of switch responses",#
+		xlab="Participant", cex.axis=1.5, cex.lab=1.5)#
+abline(0.65, 0, col='red')#
+abline(0.83, 0, col='red')#
+#
+stay_props_byoptions <- tapply(alldata$stay, list(alldata$reward, alldata$subj), mean)#
+#
+# only for baseline kids because of one kid that never chose 2 option#
+#stay_props_byoptions[2,5] <- 0#
+means <- c( mean(stay_props_byoptions[1,], na.rm=T),#
+			mean(stay_props_byoptions[2,] , na.rm=T),#
+			mean(stay_props_byoptions[3,] , na.rm=T), #
+			mean(stay_props_byoptions[4,] , na.rm=T))#
+sds <- c( sd(stay_props_byoptions[1,], na.rm=T),#
+			sd(stay_props_byoptions[2,], na.rm=T),#
+			sd(stay_props_byoptions[3,], na.rm=T),#
+			sd(stay_props_byoptions[4,], na.rm=T))#
+#
+ns <- c( length(stay_props_byoptions[1,]),#
+			length(stay_props_byoptions[2,]),#
+			length(stay_props_byoptions[3,]),#
+			length(stay_props_byoptions[4,]))#
+ses <- sds/sqrt(ns)#
+#
+x <- barplot(means, names.arg = c("1", "2", "3", "10"),#
+			 main = "Creature Novelty: children",#
+			 xlab = "option",#
+			 ylab = "stay proportion",#
+			 ylim = c(0,1))#
+segments(x, means+ses, x, means-ses)#
+#
+#######################
+choices <- tapply(alldata$reward, list(alldata$subj, alldata$reward), length)#
+choice_props <- choices[,4]/100#
+t.test(choice_props, mu=0.25)#
+#
+######
+###########################
+t.test(choice_props_adults, choice_props_kids, var.equal=T)#
+#
+d.t.unpaired<-function(t.val,n1,n2){#
+  d<-t.val*sqrt((n1+n2)/(n1*n2))#
+  names(d)<-"effect size d"#
+  return(d)#
+}#
+block1 <- alldata[alldata$trial <= 20,]#
+block2 <- alldata[alldata$trial > 20 & alldata$trial <= 40,]#
+block3 <- alldata[alldata$trial > 40 & alldata$trial <= 60,]#
+block4 <- alldata[alldata$trial > 60 & alldata$trial <= 80,]#
+block5 <- alldata[alldata$trial > 80 & alldata$trial <= 100,]#
+block1_choices <- tapply(block1$reward, list(block1$subj, block1$reward), length)#
+block1_choices[is.na(block1_choices)] <- 0#
+#
+block2_choices <- tapply(block2$reward, list(block2$subj, block2$reward), length)#
+block2_choices[is.na(block2_choices)] <- 0#
+#
+block3_choices <- tapply(block3$reward, list(block3$subj, block3$reward), length)#
+block3_choices[is.na(block3_choices)] <- 0#
+#
+block4_choices <- tapply(block4$reward, list(block4$subj, block4$reward), length)#
+block4_choices[is.na(block4_choices)] <- 0#
+#
+block5_choices <- tapply(block5$reward, list(block5$subj, block5$reward), length)#
+block5_choices[is.na(block5_choices)] <- 0#
+# means#
+line10_means <- c( mean(block1_choices[,4]), #
+             mean(block2_choices[,4]),#
+             mean(block3_choices[,4]),#
+             mean(block4_choices[,4]),#
+             mean(block5_choices[,4]))#
+line3_means <- c( mean(block1_choices[,3]), #
+             mean(block2_choices[,3]),#
+             mean(block3_choices[,3]),#
+             mean(block4_choices[,3]),#
+             mean(block5_choices[,3]))#
+line2_means <- c( mean(block1_choices[,2]), #
+             mean(block2_choices[,2]),#
+             mean(block3_choices[,2]),#
+             mean(block4_choices[,2]),#
+             mean(block5_choices[,2]))#
+line1_means <- c( mean(block1_choices[,1]), #
+             mean(block2_choices[,1]),#
+             mean(block3_choices[,1]),#
+             mean(block4_choices[,1]),#
+             mean(block5_choices[,1]))#
+#
+# standard deviations#
+line10_sds <- c( sd(block1_choices[,4]), #
+             sd(block2_choices[,4]),#
+             sd(block3_choices[,4]),#
+             sd(block4_choices[,4]),#
+             sd(block5_choices[,4]))#
+line3_sds <- c( sd(block1_choices[,3]), #
+             sd(block2_choices[,3]),#
+             sd(block3_choices[,3]),#
+             sd(block4_choices[,3]),#
+             sd(block5_choices[,3]))#
+line2_sds <- c( sd(block1_choices[,2]), #
+             sd(block2_choices[,2]),#
+             sd(block3_choices[,2]),#
+             sd(block4_choices[,2]),#
+             sd(block5_choices[,2]))#
+line1_sds <- c( sd(block1_choices[,1]), #
+             sd(block2_choices[,1]),#
+             sd(block3_choices[,1]),#
+             sd(block4_choices[,1]),#
+             sd(block5_choices[,1]))#
+#
+# Ns#
+line10_lengths <- c( length(block1_choices[,4]), #
+             length(block2_choices[,4]),#
+             length(block3_choices[,4]),#
+             length(block4_choices[,4]),#
+             length(block5_choices[,4]))#
+line3_lengths <- c( length(block1_choices[,3]), #
+             length(block2_choices[,3]),#
+             length(block3_choices[,3]),#
+             length(block4_choices[,3]),#
+             length(block5_choices[,3]))#
+line2_lengths <- c( length(block1_choices[,2]), #
+             length(block2_choices[,2]),#
+             length(block3_choices[,2]),#
+             length(block4_choices[,2]),#
+             length(block5_choices[,2]))#
+line1_lengths <- c( length(block1_choices[,1]), #
+             length(block2_choices[,1]),#
+             length(block3_choices[,1]),#
+             length(block4_choices[,1]),#
+             length(block5_choices[,1]))#
+line10_ses <- line10_sds/sqrt(line10_lengths)#
+line3_ses <- line3_sds/sqrt(line3_lengths)#
+line2_ses <- line2_sds/sqrt(line2_lengths)#
+line1_ses <- line1_sds/sqrt(line1_lengths)#
+plot(line10_means/20, type='l', col = 'blue', #
+	 ylim=c(0,1), ylab='Proportion of selections', #
+	 xlab="Block (20 trials)", main='', cex.lab= 1.4, cex.axis=1.3, lwd=3)#
+lines(line3_means/20, col = 'green', lwd=3)#
+lines(line2_means/20, col = 'yellow', lwd=3)#
+lines(line1_means/20, col = 'red', lwd=3)#
+#
+legend(1, 1.0, c("10", "3", "2", "1"), #
+	   col = c("blue", "green", "yellow", "red"), #
+	   lty = c(1,1,1,1), cex = 1.2)#
+#
+x <- seq(5)#
+segments(x, line10_means/20+line10_ses/20, x, line10_means/20-line10_ses/20, col='blue')#
+segments(x, line3_means/20+line3_ses/20, x, line3_means/20-line3_ses/20, col='green')#
+segments(x, line2_means/20+line2_ses/20, x, line2_means/20-line2_ses/20, col='yellow')#
+segments(x, line1_means/20+line1_ses/20, x, line1_means/20-line1_ses/20, col='red')#
+#
+#####################################################################
+#
+choice_props_door <- tapply(alldata$reward, list(alldata$subj, alldata$reward, alldata$door_chose), length)#
+choice_props_door[is.na(choice_props_door)] <- 0#
+#
+#choice_props_door <- choice_props_door/100#
+choice_props_door[,,1] <- choice_props_door[,,1]/75#
+choice_props_door[,,2] <- choice_props_door[,,2]/25#
+#
+means <- apply(choice_props_door, c(2,3), mean)#
+sds <- apply(choice_props_door, c(2,3), sd)#
+Ns <- apply(choice_props_door, c(2,3), length)#
+#
+ses <- sds/sqrt(Ns)#
+#
+x <- barplot(t(means), beside=T, xlab= "Value", ylab="Probability of choosing option",#
+			 legend.text= c("Exposed", "Covered"), ylim=c(0,1.0#
+			 ))#
+segments(x,t(means)+t(ses), x, t(means)-t(ses))#
+#weighted_means <- c(means[,1]/0.75, means[,2]/0.25)#
+#weighted_means2 <- t(matrix(weighted_means, 4))#
+#
+#x <- barplot(weighted_means2, beside=T, xlab= "Value", ylab="Weighted Mean proportions",#
+#			 legend.text= c("Exposed", "Covered"), ylim=c(0,1.0),#
+#			 names.arg=c('1','2','3','4'))#
+#segments(x,weighted_means2+t(ses), x, weighted_means2-t(ses))#
+#
+######################################################################
+######################################################################
+#
+door_choices <- tapply(alldata$door_chose, alldata$subj, mean)#
+#
+t.test(door_choices, mu=0.25)#
+barplot(door_choices[order(door_choices)], ylim=c(0,1), xlab="Individual Participant", ylab = "Door chosen proportion")#
+#
+abline(0.165, 0, col='red')#
+abline(0.34, 0, col='red')#
+#
+abline(0.5, 0, col='green')
+hist(door_choices, breaks=c(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0), #
+col='blue',border='black', density=35,xlab='Proportion of trials covered option selected', main='')
+stripchart(door_choices, vertical = TRUE,  #
+    method = "jitter", pch = 19, col = 'blue', ylab='Proportion of trials covered option selected')
+stripchart(door_choices, vertical = TRUE,  #
+    method = "jitter", pch = 19, col = 'blue', ylab='Proportion of trials covered option selected')

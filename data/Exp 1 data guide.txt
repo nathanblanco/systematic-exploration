@@ -1,0 +1,26 @@
+EXPERIMENT 1 data guide
+
+The columns in the data file are organized in the following order:
+
+Subject number
+Experiment Phase
+Trial
+Condition (always 0 since there are no different conditions in this study)
+Response code 0-3; coded based on stimulus location (0: top-left; 1: bottom-left; 2: top-right; 3: bottom-right)
+Response time (in ms)
+Candy earned
+Total candy earned
+Image filename of chosen option
+Top-left (response 0) reward value
+Bottom-left (response 1) reward value
+Top-right (response 2) reward value
+Bottom-right (response 3) reward value
+
+
+In the raw files the top line records the date and time the experiment was opened,
+and the bottom line records the date and time the experiment was closed.
+
+NOTE: Some files also contain 'test' trials. These trials were from an initial version
+of the memory test. This test was abandoned after research assistants reported that 
+children did not understand the test. Data from this test were never analyzed. It was 
+replaced by an alternative memory test with responses recorded on paper forms. 

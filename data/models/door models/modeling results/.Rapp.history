@@ -1,0 +1,311 @@
+model.data  <- read.table('separate_model_fits.txt', header=T)
+model.data
+model.data$RL_best <- (model.data$RL_llh < model.data$Lag_llh) & #
+					  (model.data$RL_llh < model.data$Door_llh) #
+model.data$Lag_best <- (model.data$Lag_llh < model.data$RL_llh) & #
+					  (model.data$Lag_llh < model.data$Door_llh) #
+model.data$door_best <- (model.data$Door_llh < model.data$Lag_llh) & #
+					  (model.data$Door_llh < model.data$RL_llh)
+model.data
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$Lag_best))#
+sum(as.numeric(model.data$door_best))
+model.data  <- read.table('separate_model_fits.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+#model.data$RL_best <- (model.data$RL_llh < model.data$Lag_llh) & #
+#					  (model.data$RL_llh < model.data$Door_llh) #
+#model.data$Lag_best <- (model.data$Lag_llh < model.data$RL_llh) & #
+#					  (model.data$Lag_llh < model.data$Door_llh) #
+#model.data$door_best <- (model.data$Door_llh < model.data$Lag_llh) & #
+#					  (model.data$Door_llh < model.data$RL_llh) #
+#sum(as.numeric(model.data$RL_best))#
+#sum(as.numeric(model.data$Lag_best))#
+#sum(as.numeric(model.data$door_best))#
+model.data$RL_aic <- (model.data$RL_llh * 2) + 4#
+model.data$Lag_aic <- (model.data$Lag_llh * 2) + 2#
+model.data$Door_aic <- (model.data$Door_llh * 2) + 2#
+model.data$random_aic <- -log(0.25)*100*2#
+model.data$RL_best <- (model.data$RL_aic < model.data$Lag_aic) & #
+					  (model.data$RL_aic < model.data$Door_aic)  & #
+					  (model.data$RL_aic < model.data$random_aic)#
+model.data$Lag_best <- (model.data$Lag_aic < model.data$RL_aic) & #
+					  (model.data$Lag_aic < model.data$Door_aic) & #
+					  (model.data$Lag_aic < model.data$random_aic) #
+model.data$Door_best <- (model.data$Door_aic < model.data$RL_aic) #
+						& (model.data$Door_aic < model.data$Lag_aic) #
+						& (model.data$Door_aic < model.data$random_aic) #
+#
+model.data$random_best <- (model.data$random_aic < model.data$RL_aic) #
+						& (model.data$random_aic < model.data$Lag_aic) #
+						& (model.data$random_aic < model.data$Door_aic) #
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$Lag_best))#
+sum(as.numeric(model.data$Door_best))#
+sum(as.numeric(model.data$random_best))
+model.data$RL_aic <- (model.data$RL_llh * 2) + 4#
+model.data$Lag_aic <- (model.data$Lag_llh * 2) + 2#
+model.data$Door_aic <- (model.data$Door_llh * 2) + 2#
+model.data$random_aic <- -log(0.25)*100*2#
+model.data$RL_best <- (model.data$RL_aic < model.data$Lag_aic) & #
+					  (model.data$RL_aic < model.data$Door_aic)  & #
+					  (model.data$RL_aic < model.data$random_aic)#
+model.data$Lag_best <- (model.data$Lag_aic < model.data$RL_aic) & #
+					  (model.data$Lag_aic < model.data$Door_aic) & #
+					  (model.data$Lag_aic < model.data$random_aic) #
+model.data$Door_best <- (model.data$Door_aic < model.data$RL_aic) & #
+						(model.data$Door_aic < model.data$Lag_aic) & #
+						(model.data$Door_aic < model.data$random_aic) #
+#
+model.data$random_best <- (model.data$random_aic < model.data$RL_aic) & #
+						(model.data$random_aic < model.data$Lag_aic) & #
+						(model.data$random_aic < model.data$Door_aic) #
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$Lag_best))#
+sum(as.numeric(model.data$Door_best))#
+sum(as.numeric(model.data$random_best))
+door_prop <- 24/36#
+lag_prop <- 1/36#
+value_prop <- 10/36#
+random_prop <- 1/36#
+#
+lag1_prop <- 18/32#
+value1_prop <- 14/32#
+# adults, kids exp1, exp2 (door), exp 3 (exposed)#
+#
+# value, door, lag, radom#
+counts <- c(1, 0, 0,  0.0, #
+			value1_prop, 0, lag1_prop,  0,#
+			value_prop, door_prop, lag_prop,  random, #
+			21/39, 0, 8/39, 10/39,#
+			0,0,0,0,0,0,0,0)#
+counts <- matrix(counts, 4)#
+#
+#cols= c('#009999', '#FFFF99', '#FF6600') # c("purple", "yellow", "orange")#
+#
+#cols= c('#009999', '#FFFF99', '#FF3366')#
+#
+#cols= c('#009999', '#FFFF99', '#CC6699')#
+#
+#cols= c('#009999', '#FFFF99', '#FF99FF')#
+#
+#cols= c('#009999', '#FFFF66', '#CC6699')#
+#
+#cols= c('#009966', '#FFFF66', '#CC6699')#
+#
+#densities <- c(30, 100, 100)#
+#
+cols= c('#990066', '#009966', '#FFFF66', '#FFFFFF')#
+#
+densities <- c(30, 100, 100, 100 )#
+#
+barplot(counts, main="",#
+  		names.arg = c('Adults', 'Children', 'Children', 'Children', '', ''), col= cols,#
+ 		legend = c('Uncertainty', 'Lag', 'Value', 'Random'), density = densities,#
+ 		ylab='Proportion of Participants', cex.axis = 1.5, cex.lab = 1.5,#
+ 		args.legend = c(cex=1.3), cex.names = 1.2)
+counts <- c(1, 0, 0,  0.0, #
+			value1_prop, 0, lag1_prop,  0,#
+			value_prop, door_prop, lag_prop, random_prop, #
+			21/39, 0, 8/39, 10/39,#
+			0,0,0,0,0,0,0,0)#
+counts <- matrix(counts, 4)#
+#
+#cols= c('#009999', '#FFFF99', '#FF6600') # c("purple", "yellow", "orange")#
+#
+#cols= c('#009999', '#FFFF99', '#FF3366')#
+#
+#cols= c('#009999', '#FFFF99', '#CC6699')#
+#
+#cols= c('#009999', '#FFFF99', '#FF99FF')#
+#
+#cols= c('#009999', '#FFFF66', '#CC6699')#
+#
+#cols= c('#009966', '#FFFF66', '#CC6699')#
+#
+#densities <- c(30, 100, 100)#
+#
+cols= c('#990066', '#009966', '#FFFF66', '#FFFFFF')#
+#
+densities <- c(30, 100, 100, 100 )#
+#
+barplot(counts, main="",#
+  		names.arg = c('Adults', 'Children', 'Children', 'Children', '', ''), col= cols,#
+ 		legend = c('Uncertainty', 'Lag', 'Value', 'Random'), density = densities,#
+ 		ylab='Proportion of Participants', cex.axis = 1.5, cex.lab = 1.5,#
+ 		args.legend = c(cex=1.3), cex.names = 1.2)
+barplot(counts, main="",#
+  		names.arg = c('Adults', 'Children', 'Children', 'Children', '', ''), col= cols,#
+ 		legend = c('Value', 'Uncertainty', 'Lag', 'Random'), density = densities,#
+ 		ylab='Proportion of Participants', cex.axis = 1.5, cex.lab = 1.5,#
+ 		args.legend = c(cex=1.3), cex.names = 1.2)
+counts <- c(0, 0, 1,  0.0, #
+			lag1_prop, 0, value1_prop,  0,#
+			lag_prop, door_prop, value_prop, random_prop, #
+			8/39, 0, 21/39, 10/39,#
+			0,0,0,0,0,0,0,0)#
+counts <- matrix(counts, 4)#
+#
+#cols= c('#009999', '#FFFF99', '#FF6600') # c("purple", "yellow", "orange")#
+#
+#cols= c('#009999', '#FFFF99', '#FF3366')#
+#
+#cols= c('#009999', '#FFFF99', '#CC6699')#
+#
+#cols= c('#009999', '#FFFF99', '#FF99FF')#
+#
+#cols= c('#009999', '#FFFF66', '#CC6699')#
+#
+#cols= c('#009966', '#FFFF66', '#CC6699')#
+#
+#densities <- c(30, 100, 100)#
+#
+cols= c( '#FFFF66', '#009966','#990066',  '#FFFFFF')#
+#
+densities <- c(30, 100, 100, 100 )#
+#
+# value at botttom#
+barplot(counts, main="",#
+  		names.arg = c('Adults', 'Children', 'Children', 'Children', '', ''), col= cols,#
+ 		legend = c('Uncertainty', 'Lag', 'Value', 'Random'), density = densities,#
+ 		ylab='Proportion of Participants', cex.axis = 1.5, cex.lab = 1.5,#
+ 		args.legend = c(cex=1.3), cex.names = 1.2)
+densities <- c(100 100, 30, 100 )#
+#
+# value at botttom#
+barplot(counts, main="",#
+  		names.arg = c('Adults', 'Children', 'Children', 'Children', '', ''), col= cols,#
+ 		legend = c('Uncertainty', 'Lag', 'Value', 'Random'), density = densities,#
+ 		ylab='Proportion of Participants', cex.axis = 1.5, cex.lab = 1.5,#
+ 		args.legend = c(cex=1.3), cex.names = 1.2)
+cols= c( '#FFFF66', '#009966','#990066',  '#FFFFFF')#
+#
+densities <- c(100, 100, 30, 100 )#
+#
+# value at botttom#
+barplot(counts, main="",#
+  		names.arg = c('Adults', 'Children', 'Children', 'Children', '', ''), col= cols,#
+ 		legend = c('Uncertainty', 'Lag', 'Value', 'Random'), density = densities,#
+ 		ylab='Proportion of Participants', cex.axis = 1.5, cex.lab = 1.5,#
+ 		args.legend = c(cex=1.3), cex.names = 1.2)
+# value at botttom#
+barplot(counts, main="",#
+  		names.arg = c('Adults', 'Children', 'Children', 'Children', '', ''), col= cols,#
+ 		legend = c('Lag','Uncertainty',  'Value', 'Random'), density = densities,#
+ 		ylab='Proportion of Participants', cex.axis = 1.5, cex.lab = 1.5,#
+ 		args.legend = c(cex=1.3), cex.names = 1.2)
+model.data  <- read.table('separate_model_fits.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+#model.data$RL_best <- (model.data$RL_llh < model.data$Lag_llh) & #
+#					  (model.data$RL_llh < model.data$Door_llh) #
+#model.data$Lag_best <- (model.data$Lag_llh < model.data$RL_llh) & #
+#					  (model.data$Lag_llh < model.data$Door_llh) #
+#model.data$door_best <- (model.data$Door_llh < model.data$Lag_llh) & #
+#					  (model.data$Door_llh < model.data$RL_llh) #
+#sum(as.numeric(model.data$RL_best))#
+#sum(as.numeric(model.data$Lag_best))#
+#sum(as.numeric(model.data$door_best))#
+model.data$RL_aic <- (model.data$RL_llh * 2) + 4#
+model.data$Lag_aic <- (model.data$Lag_llh * 2) + 2#
+model.data$Door_aic <- (model.data$Door_llh * 2) + 2#
+model.data$random_aic <- -log(0.25)*100*2#
+model.data$RL_best <- (model.data$RL_aic < model.data$Lag_aic) & #
+					  (model.data$RL_aic < model.data$Door_aic)  & #
+					  (model.data$RL_aic < model.data$random_aic)#
+model.data$Lag_best <- (model.data$Lag_aic < model.data$RL_aic) & #
+					  (model.data$Lag_aic < model.data$Door_aic) & #
+					  (model.data$Lag_aic < model.data$random_aic) #
+model.data$Door_best <- (model.data$Door_aic < model.data$RL_aic) & #
+						(model.data$Door_aic < model.data$Lag_aic) & #
+						(model.data$Door_aic < model.data$random_aic) #
+#
+model.data$random_best <- (model.data$random_aic < model.data$RL_aic) & #
+						(model.data$random_aic < model.data$Lag_aic) & #
+						(model.data$random_aic < model.data$Door_aic) #
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$Lag_best))#
+sum(as.numeric(model.data$Door_best))#
+sum(as.numeric(model.data$random_best))
+model.data  <- read.table('separate_model_fits.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+#model.data$RL_best <- (model.data$RL_llh < model.data$Lag_llh) & #
+#					  (model.data$RL_llh < model.data$Door_llh) #
+#model.data$Lag_best <- (model.data$Lag_llh < model.data$RL_llh) & #
+#					  (model.data$Lag_llh < model.data$Door_llh) #
+#model.data$door_best <- (model.data$Door_llh < model.data$Lag_llh) & #
+#					  (model.data$Door_llh < model.data$RL_llh) #
+#sum(as.numeric(model.data$RL_best))#
+#sum(as.numeric(model.data$Lag_best))#
+#sum(as.numeric(model.data$door_best))#
+model.data$RL_aic <- (model.data$RL_llh * 2) + 4#
+model.data$Lag_aic <- (model.data$Lag_llh * 2) + 2#
+model.data$Door_aic <- (model.data$Door_llh * 2) + 2#
+model.data$random_aic <- -log(0.25)*100*2#
+model.data$RL_best <- (model.data$RL_aic < model.data$Lag_aic) & #
+					  (model.data$RL_aic < model.data$Door_aic)  & #
+					  (model.data$RL_aic < model.data$random_aic)#
+model.data$Lag_best <- (model.data$Lag_aic < model.data$RL_aic) & #
+					  (model.data$Lag_aic < model.data$Door_aic) & #
+					  (model.data$Lag_aic < model.data$random_aic) #
+model.data$Door_best <- (model.data$Door_aic < model.data$RL_aic) & #
+						(model.data$Door_aic < model.data$Lag_aic) & #
+						(model.data$Door_aic < model.data$random_aic) #
+#
+model.data$random_best <- (model.data$random_aic < model.data$RL_aic) & #
+						(model.data$random_aic < model.data$Lag_aic) & #
+						(model.data$random_aic < model.data$Door_aic) #
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$Lag_best))#
+sum(as.numeric(model.data$Door_best))#
+sum(as.numeric(model.data$random_best))
+model.data  <- read.table('separate_model_fits_door.txt', header=T)#
+#subj RL RL_auto switch switch_prob bias random lag#
+#
+#hist(model.data$switch_prob)#
+#
+#subj RL RL_auto switch switch_prob bias random lag Bev Blag#
+#model.data$RL_best <- (model.data$RL_llh < model.data$Lag_llh) & #
+#					  (model.data$RL_llh < model.data$Door_llh) #
+#model.data$Lag_best <- (model.data$Lag_llh < model.data$RL_llh) & #
+#					  (model.data$Lag_llh < model.data$Door_llh) #
+#model.data$door_best <- (model.data$Door_llh < model.data$Lag_llh) & #
+#					  (model.data$Door_llh < model.data$RL_llh) #
+#sum(as.numeric(model.data$RL_best))#
+#sum(as.numeric(model.data$Lag_best))#
+#sum(as.numeric(model.data$door_best))#
+model.data$RL_aic <- (model.data$RL_llh * 2) + 4#
+model.data$Lag_aic <- (model.data$Lag_llh * 2) + 2#
+model.data$Door_aic <- (model.data$Door_llh * 2) + 2#
+model.data$random_aic <- -log(0.25)*100*2#
+model.data$RL_best <- (model.data$RL_aic < model.data$Lag_aic) & #
+					  (model.data$RL_aic < model.data$Door_aic)  & #
+					  (model.data$RL_aic < model.data$random_aic)#
+model.data$Lag_best <- (model.data$Lag_aic < model.data$RL_aic) & #
+					  (model.data$Lag_aic < model.data$Door_aic) & #
+					  (model.data$Lag_aic < model.data$random_aic) #
+model.data$Door_best <- (model.data$Door_aic < model.data$RL_aic) & #
+						(model.data$Door_aic < model.data$Lag_aic) & #
+						(model.data$Door_aic < model.data$random_aic) #
+#
+model.data$random_best <- (model.data$random_aic < model.data$RL_aic) & #
+						(model.data$random_aic < model.data$Lag_aic) & #
+						(model.data$random_aic < model.data$Door_aic) #
+sum(as.numeric(model.data$RL_best))#
+sum(as.numeric(model.data$Lag_best))#
+sum(as.numeric(model.data$Door_best))#
+sum(as.numeric(model.data$random_best))
+unique(model.data[model.data$RL_best==TRUE,]$subj)#
+unique(model.data[model.data$Lag_best==TRUE,]$subj)#
+unique(model.data[model.data$Door_best==TRUE,]$subj)#
+unique(model.data[model.data$random_best==TRUE,]$subj)

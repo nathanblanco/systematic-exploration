@@ -1,0 +1,29 @@
+EXPERIMENT 2 data guide
+
+The columns in the data file are organized in the following order:
+
+ 'door_loc', 'door_chose', 'r1', 'r2', 'r3', 'r4')
+
+
+
+Subject number
+Experiment Phase
+Trial
+Condition (always 0 since there are no different conditions in this study)
+Response code 0-3; coded based on stimulus location (0: top-left; 1: bottom-left; 2: top-right; 3: bottom-right)
+Response time (in ms)
+Candy earned
+Total candy earned
+Image filename of chosen option
+Location of the hidden option
+Whether the hidden option was chosen (0: no; 1: yes)
+Top-left (response 0) reward value
+Bottom-left (response 1) reward value
+Top-right (response 2) reward value
+Bottom-right (response 3) reward value
+
+
+In the raw files the top line records the date and time the experiment was opened,
+and the bottom line records the date and time the experiment was closed.
+
+

@@ -1,0 +1,107 @@
+import os, sys, signal
+#from openfile import openfile
+import switch_model
+import RL_auto
+import RL_Lag
+import RL
+import bias_model
+import mixture_model1
+from numpy import *
+
+
+def openfile(filename, n_trials):
+    myfile = open(filename)
+    alldata = myfile.readlines()
+    
+    for i in range(len(alldata)):
+        alldata[i]=alldata[i].split()
+        
+    allsubjdata = []
+    subj = 'x'
+    subjindex = -1
+    for line in alldata:
+        if int(line[2]) <= n_trials:
+            if (line[0] != subj):
+                subj = line[0]
+                allsubjdata.append([line])
+                subjindex += 1
+            else:
+                allsubjdata[subjindex].append(line)
+    
+    print allsubjdata
+    return allsubjdata
+
+
+#f = open("adults_baseline_aics.txt", "w+")
+#f = open("child_baseline_aics.txt", "w+")
+#f = open("adults_novelty1_aics.txt", "w+")
+#f = open("child_novelty10_aics.txt", "w+")
+
+f = open("modeling results/aics_40_trials_BL.txt", "w+")
+
+f.write('subj RL RL_auto switch switch_prob bias random lag Bev Blag\n')
+
+#n_trials = 100
+
+# CURRENTLY SET TO ONLY MODEL FIRST 40 TRIALS TO COMPARE
+# TO 'REAL LIFE' (TOKEN GAME) DATA
+n_trials = 40
+
+#beh_data = openfile('baseline_children.txt', n_trials)
+
+#beh_data = openfile('baseline_adults.txt', n_trials)
+#beh_data = openfile('creatures10_children.txt', n_trials)
+#beh_data = openfile('novelty10_children.txt', n_trials)
+#beh_data = openfile('novelty1_adults.txt', n_trials)
+beh_data = openfile('BL_NV_combined_children.txt', n_trials)
+#beh_data = openfile('bland.txt', n_trials)
+#beh_data = openfile('BL_NV_combined_adults.txt', n_trials)
+
+#Fits = []
+#files = os.listdir(dir)
+
+def get_aic(nllh, n_params):
+    aic = 2*nllh + 2*n_params
+    return aic
+
+
+# for subj_data in beh_data[:]:
+#         
+#         subj = subj_data[0][0]
+#                 
+#         [sw_nllh, params] = mixture_model1.do_fit(subj_data, 4, 6, 4)
+#         
+#         aic = get_aic( sw_nllh, 4)
+#         
+#         f.write(subj+' '+str(aic)+' ')
+#         for i in params:
+#             f.write(str(i)+' ')
+#         f.write('\n')
+#         f.flush()
+
+
+
+for subj_data in beh_data[:]:
+        
+        subj = subj_data[0][0]
+                
+        rl_nllh = RL.do_fit(subj_data, 4, 6, 4)
+        auto_nllh = RL_auto.do_fit(subj_data, 4, 6, 4)
+        [switch_nllh, switch] = switch_model.do_fit(subj_data, 4, 6, 4)
+        bias_nllh = bias_model.do_fit(subj_data, 4, 6, 4)
+        
+        random_nllh = -log(0.25)*n_trials
+        
+        [lag_nllh, Bev, Blag] = RL_Lag.do_fit(subj_data, 4, 6, 4)
+        
+        
+        aics =  [get_aic(rl_nllh, 2), get_aic(auto_nllh, 3), get_aic(switch_nllh, 1), 
+                 switch, get_aic(bias_nllh, 3), get_aic(random_nllh, 0), get_aic(lag_nllh, 3), Bev, Blag]
+        
+        f.write(subj+' ')
+        for i in aics:
+            f.write(str(i)+' ')
+        f.write('\n')
+        f.flush()
+
+
